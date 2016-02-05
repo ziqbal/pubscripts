@@ -1,6 +1,6 @@
 #
 # Quickly setup a wordpress install
-# Handles database , config file , htacces
+# Handles database , config file , htaccess
 # Parameter 1 = project name
 #
 

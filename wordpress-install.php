@@ -120,13 +120,29 @@ END;
 file_put_contents("/tmp/wp-config.php","$WPCONFIG");
 
 
+$htaccess = <<<END
+
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /_craft_/wordpress{$projectname}/
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /_craft_/wordpress{$projectname}/index.php [L]
+</IfModule>
+
+END;
+
+file_put_contents("/tmp/htaccess.txt","$htaccess");
+
 $syscmds = array();
 $syscmds[]="cd /tmp/;rm -rf wordpress;unzip $APPARCHIVE;";
 $syscmds[]="mv /tmp/wordpress ./wordpress{$projectname}";
 $syscmds[]="mkdir wordpress{$projectname}/wp-content/uploads/";
 $syscmds[]="chmod ugo+rwx wordpress{$projectname}/wp-content/uploads/";
-$syscmds[]="touch wordpress{$projectname}/.htaccess";
 $syscmds[]="cp /tmp/wp-config.php wordpress{$projectname}/";
+$syscmds[]="cp /tmp/htaccess.txt wordpress{$projectname}/.htaccess";
 
 
 chdir($_CONFIG[ "targetdir" ]);

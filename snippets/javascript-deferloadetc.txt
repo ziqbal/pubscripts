@@ -1,0 +1,84 @@
+<?php
+
+
+if( $_SERVER[ 'HTTP_REFERER' ] !== 'https://XYZ/' ) exit( ) ;
+
+if( !isset( $_GET[ '_k' ] ) ) exit( ) ;
+
+$_CONFIG = array( ) ;
+$_CONFIG[ '_k' ] = $_GET[ '_k' ] ;
+
+if( $_CONFIG[ '_k' ] !== 'tnzaxdtt' ) exit( ) ;
+
+header( "Expires: Sun, 01 Jan 2038 00:00:00 GMT" ) ;
+header( "Cache-Control: no-store, no-cache, must-revalidate" ) ;
+header( "Cache-Control: post-check=0, pre-check=0" , FALSE ) ;
+header( "Pragma: no-cache" ) ;
+header( "Content-type: text/javascript" ) ;
+
+$_jsFunctionTickTock = "tt_".uniqid( ) ;
+$_jsFunctionBoot = "b_".uniqid( ) ;
+
+ob_start( ) ;
+
+include( "template-boot.js" ) ;
+
+$_templateBoot = json_encode( ob_get_contents( ) ) ;
+
+ob_end_clean( ) ;
+
+ob_start( ) ;
+
+include( "template-ticktock.js" ) ;
+
+$_templateTicktock = ob_get_contents( ) ;
+
+ob_end_clean( ) ;
+
+
+print( $_templateTicktock ) ;
+
+?>
+
+/////
+
+
+
+
+function <?= $_jsFunctionTickTock ?>( ) {
+
+	if( document.readyState === 'interactive' || document.readyState === 'complete' ) {
+
+		var x = document.createElement( 'script' ) ;
+
+    	x.text = <?= $_templateBoot ?> ;
+
+		document.body.appendChild( x ) ;
+
+		<?= $_jsFunctionBoot ?>( ) ;
+
+	} else {
+
+		setTimeout( <?= $_jsFunctionTickTock ?> , 1000 ) ;
+
+	} ;
+
+} ;
+
+setTimeout( <?= $_jsFunctionTickTock ?> , 1000 ) ;
+
+
+/////
+
+
+
+function <?= $_jsFunctionBoot ?>( ) {
+
+	console.log( "BOOT" ) ;
+
+	$( ".container" ).append( "OK" ) ; 
+
+} ;
+
+
+

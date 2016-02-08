@@ -1,0 +1,3 @@
+
+
+document.cookie = "skey="+r['skey']+";max-age=30;path=/";

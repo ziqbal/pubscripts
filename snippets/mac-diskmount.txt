@@ -1,0 +1,4 @@
+
+
+diskutil mount diskutil list | grep "mosq" | sed -n -e 's/^.* //p'
+

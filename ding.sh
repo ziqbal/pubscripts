@@ -1,1 +1,1 @@
-afplay /Users/zaf/Music/bell.mp3
+afplay -v 0.1 /Users/zaf/Music/bell.mp3

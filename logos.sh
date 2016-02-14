@@ -1,6 +1,7 @@
 #
 # Crazy! My Own Editor! In PHP!
-# Well there is an itch I gotta scratch...
+# Well there is an itch I gotta scratch.
+# Also known as Meditations.
 # Parameter 1 = filename
 #
 

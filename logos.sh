@@ -1,5 +1,6 @@
 #
-# Crazy! My Own Editor!
+# Crazy! My Own Editor! In PHP!
+# There must be something......
 # Parameter 1 = filename
 #
 

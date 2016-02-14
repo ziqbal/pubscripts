@@ -39,6 +39,13 @@ readline_callback_handler_install( '' , function( ) { } ) ;
 
 system('tput clear');
 
+system( 'echo "lines\ncols" | tput -S > /tmp/tput.dat' ) ;
+
+$f=file("/tmp/tput.dat",FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+//print_r($f);exit;
+$sw=$f[1];
+$sh=$f[0];
+
 $frame = 0 ;
 
 while( true ) {
@@ -51,7 +58,6 @@ while( true ) {
 
   if( $n && in_array( STDIN , $r ) ) {
 
-	system( 'echo "lines\ncols" | tput -S > /tmp/tput.dat' ) ;
 
 	//system('tput clear');
 //	system('tput cup 0 0');
@@ -71,7 +77,7 @@ while( true ) {
     }
     if( $c == 'k' ){
       $cx++ ;
-      if($cx>$sw) $cx = $sw ;
+      if($cx>=$sw) $cx = $sw-1 ;
       $updateCursor=true;
     }
     if( $c == 'd' ){
@@ -81,7 +87,7 @@ while( true ) {
     }
     if( $c == 'f' ){
       $cy++ ;
-      if($cy>$sh) $cy = $sh ;
+      if($cy>=$sh) $cy = $sh -1;
       $updateCursor=true;
     }
     if( $c == 'q' ) break ;

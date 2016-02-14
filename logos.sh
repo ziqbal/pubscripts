@@ -1,6 +1,6 @@
 #
 # Crazy! My Own Editor! In PHP!
-# There must be something......
+# Well there is an itch I gotta scratch...
 # Parameter 1 = filename
 #
 

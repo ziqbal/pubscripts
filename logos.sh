@@ -1,5 +1,5 @@
 #
-# My Own Editor!
+# Crazy! My Own Editor!
 # Parameter 1 = filename
 #
 

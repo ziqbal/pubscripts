@@ -19,8 +19,8 @@ $_CONFIG[ "targetdir" ] = $argv[ 1 ] ;
 /////
 
 $grid=array();
-for($x=0;$x<1024;$x++){
-  for($y=0;$y<1024;$y++){
+for($x=0;$x<256;$x++){
+  for($y=0;$y<256;$y++){
     $grid[$x][$y]=-1;
   }
 }

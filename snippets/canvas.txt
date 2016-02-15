@@ -37,7 +37,7 @@ function setup( ) {
         canvasWidth  = canvasHolder.width,
         canvasHeight = canvasHolder.height;
   
- 
+// FIXME TODO add check to see if canvas found 
   zcanvas=createCanvas(canvasWidth, canvasHeight).parent(canvasHolder);
 
 

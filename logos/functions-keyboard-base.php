@@ -116,3 +116,16 @@ function _keyboardBaseHandleMovement( ) {
 	return( false ) ;
 
 }
+
+
+function _keyboardBaseInputIsPrintable( ) {
+
+	$c = _keyboardBaseGetInput( ) ;
+
+	if(ord($c)<32) return(false);
+	if(ord($c)>126) return(false);
+	return(true);
+
+
+
+}

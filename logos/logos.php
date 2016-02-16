@@ -43,23 +43,26 @@ while( true ) {
     if( _appBaseGetMode( ) == 'edit' ) {
 
 
-      if( _keyboardBaseIsTabKey( ) ) continue;
+      //if( _keyboardBaseIsTabKey( ) ) continue;
 
-      print( _keyboardBaseGetInput( ) ) ;
+      if( _keyboardBaseInputIsPrintable( ) ) {
+
+        print( _keyboardBaseGetInput( ) ) ;
+        _cursorBaseRight( ) ;
+
+      }
 
       if( _keyboardBaseIsEnterKey( ) ) {
 
           _cursorBaseEnter( );
 
-      } else {
-
-        _cursorBaseRight( ) ;
-
       }
+
       
 
       _screenHandleShowCursor( ) ;
 
+      _cursorBaseUpdate();
       continue ;
 
     }

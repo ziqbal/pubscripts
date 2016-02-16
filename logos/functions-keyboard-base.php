@@ -6,6 +6,29 @@ function _keyboardBase( ) {
 
 }
 
+function _keyboardBaseIsEnterKey( ) {
+
+	if( ord( _keyboardBaseGetInput( ) ) == 10 ) {
+		return(true);
+	}
+
+	return(false);
+
+
+}
+
+function _keyboardBaseIsTabKey( ) {
+
+	if( ord( _keyboardBaseGetInput( ) ) == 9 ) {
+		return(true);
+	}
+
+	return(false);
+
+
+}
+
+
 function _keyboardBaseSetInput( $c ) {
 
 	_configSet( "keyboardinput" , $c ) ;

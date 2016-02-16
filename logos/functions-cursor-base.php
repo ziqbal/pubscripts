@@ -97,6 +97,12 @@ function _cursorBaseGetY( ) {
 	
 }
 
+function _cursorBaseEnter( ) {
+	_cursorBaseSetX(0);
+	_cursorBaseDown();
+
+}
+
 function _cursorBaseLeft( ) {
 
 

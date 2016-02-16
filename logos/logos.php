@@ -42,9 +42,21 @@ while( true ) {
 
     if( _appBaseGetMode( ) == 'edit' ) {
 
+
+      if( _keyboardBaseIsTabKey( ) ) continue;
+
       print( _keyboardBaseGetInput( ) ) ;
+
+      if( _keyboardBaseIsEnterKey( ) ) {
+
+          _cursorBaseEnter( );
+
+      } else {
+
+        _cursorBaseRight( ) ;
+
+      }
       
-      _cursorBaseRight( ) ;
 
       _screenHandleShowCursor( ) ;
 

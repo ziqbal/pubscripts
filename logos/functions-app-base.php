@@ -30,8 +30,10 @@ function _appBaseSetFrame( $v ) {
 }
 
 
-function _appBaseFrameNext( ) {
+function _appBaseLoop( ) {
 
-	_appBaseSetFrame( _appBaseGetFrame( ) + 1 ) ; 
+	_cursorBaseHighlightToggle( ) ;
+	
+	_appBaseSetFrame( _appBaseGetFrame( ) + 1 ) ;
 
 }

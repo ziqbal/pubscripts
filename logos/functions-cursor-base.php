@@ -10,21 +10,47 @@ function _cursorBase( ) {
 	_configSet( "cursory" , 0 ) ;
 	_configSet( "cursordirty" , true ) ;
 
+	_configSet( "cursorhighlight" , true ) ;
+
+
+}
+
+function _cursorBaseHighlightToggle( ) {
+
+	$mode = _appBaseGetMode( ) ;
+
+	$trigger=100;
+	if($mode=='command') $trigger=10;
+
+	if( ( _appBaseGetFrame( ) % $trigger ) != 0 ) return ;
+
+	if( _configGet( "cursorhighlight") ) {
+		_configSet( "cursorhighlight" , false ) ;
+
+		system('tput cnorm');
+
+	} else {
+	      system('tput civis');
+		_configSet( "cursorhighlight" , true ) ;
+	}
 
 }
 
 function _cursorBaseUpdate( ) {
 
-
 	if( _cursorBaseIsDirty( ) ) {
+
 		$cy = _cursorBaseGetY( ) ;
 		$cx = _cursorBaseGetX( ) ;
 
-		system("tput cup $cy $cx");
-		system('tput cnorm');	
-	}
+		system( "tput cup $cy $cx" ) ;
+		system( 'tput cnorm' ) ;	
 
-	_cursorBaseSetDirty( false ) ;
+		_cursorBaseSetDirty( false ) ;
+
+		return ;
+
+	}
 
 
 	_screenHandleCursorFlash( ) ;
@@ -102,8 +128,7 @@ function _cursorBaseDown( ) {
 
 function _cursorBaseDebug( ) {
 
-
-	print(_cursorBaseGetX( ).","._cursorBaseGetY( ));
+	print( _cursorBaseGetX( ).","._cursorBaseGetY( ) ) ;
 
 }
 

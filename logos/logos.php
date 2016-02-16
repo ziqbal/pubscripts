@@ -15,6 +15,8 @@ while( true ) {
   if( $n && in_array( STDIN , $r ) ) {
 
     _keyboardBaseSetInput( stream_get_contents( STDIN , 1 ) ) ;
+
+    _cursorBaseUpdate( ) ;
     
     //////////////////////////////////////////////////////////////
 
@@ -48,7 +50,10 @@ while( true ) {
 
   }
 
-  _cursorBaseUpdate( ) ;
+  _appBaseLoop( ) ;
+
+  usleep( 10000 ) ;
+
 
 }
 

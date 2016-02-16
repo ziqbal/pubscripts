@@ -7,11 +7,15 @@ function _keyboardBase( ) {
 }
 
 function _keyboardBaseSetInput( $c ) {
-	_configSet("keyboardinput",$c);
+
+	_configSet( "keyboardinput" , $c ) ;
+
 }
 
 function _keyboardBaseGetInput( ) {
-	return(_configGet("keyboardinput"));
+
+	return( _configGet( "keyboardinput" ) ) ;
+	
 }
 
 function _keyboardBaseHandleQuit( ) {

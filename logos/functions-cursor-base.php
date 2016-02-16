@@ -4,8 +4,6 @@
 
 function _cursorBase( ) {
 
-
-
 	_configSet( "cursorx" , 0 ) ;
 	_configSet( "cursory" , 0 ) ;
 	_configSet( "cursordirty" , true ) ;
@@ -19,42 +17,38 @@ function _cursorBaseHighlightToggle( ) {
 
 	$mode = _appBaseGetMode( ) ;
 
-	$trigger=100;
-	if($mode=='command') $trigger=10;
+	$trigger = 100 ;
+	if( $mode == 'command' ) $trigger = 10 ;
 
 	if( ( _appBaseGetFrame( ) % $trigger ) != 0 ) return ;
 
-	if( _configGet( "cursorhighlight") ) {
+	if( _configGet( "cursorhighlight" ) ) {
+
 		_configSet( "cursorhighlight" , false ) ;
 
-		system('tput cnorm');
+		system( 'tput cnorm' ) ;
 
 	} else {
-	      system('tput civis');
+
 		_configSet( "cursorhighlight" , true ) ;
+
+	    system( 'tput civis' ) ;
+
 	}
 
 }
 
 function _cursorBaseUpdate( ) {
 
-	if( _cursorBaseIsDirty( ) ) {
+	$cy = _cursorBaseGetY( ) ;
+	$cx = _cursorBaseGetX( ) ;
 
-		$cy = _cursorBaseGetY( ) ;
-		$cx = _cursorBaseGetX( ) ;
+	//_logBaseWrite($cx);
 
-		system( "tput cup $cy $cx" ) ;
-		system( 'tput cnorm' ) ;	
+	system( "tput cup $cy $cx" ) ;
+	system( 'tput cnorm' ) ;	
 
-		_cursorBaseSetDirty( false ) ;
-
-		return ;
-
-	}
-
-
-	_screenHandleCursorFlash( ) ;
-
+	_cursorBaseSetDirty( false ) ;
 
 }
 
@@ -76,6 +70,20 @@ function _cursorBaseSetDirty( $v ) {
 	
 }
 
+
+function _cursorBaseSetX( $v ) {
+
+	_configSet( "cursorx" , $v ) ;
+
+}
+
+function _cursorBaseSetY( $v ) {
+
+	_configSet( "cursory" , $v ) ;
+
+}
+
+
 function _cursorBaseGetX( ) {
 
 	return( _configGet( "cursorx" ) ) ;
@@ -94,16 +102,14 @@ function _cursorBaseLeft( ) {
 
 	_configSet( "cursorx" , _screenBaseGoLeft( _cursorBaseGetX( ) ) ) ;
 
-	_cursorBaseSetDirty( true ) ;
-
 }
 
 
 function _cursorBaseRight( ) {
 
-	_configSet( "cursorx" , _screenBaseGoRight( _cursorBaseGetX( ) ) ) ;
+	_cursorBaseSetX( _screenBaseGoRight( _cursorBaseGetX( ) ) ) ;
 
-	_cursorBaseSetDirty( true ) ;
+	//_logBaseWrite(_cursorBaseGetX());
 
 
 }
@@ -113,16 +119,12 @@ function _cursorBaseUp( ) {
 
 	_configSet( "cursory" , _screenBaseGoUp( _cursorBaseGetY( ) ) ) ;
 
-	_cursorBaseSetDirty( true ) ;
-
 }
 
 
 function _cursorBaseDown( ) {
 
 	_configSet( "cursory" , _screenBaseGoDown( _cursorBaseGetY( ) ) ) ;
-
-	_cursorBaseSetDirty( true ) ;
 
 }
 

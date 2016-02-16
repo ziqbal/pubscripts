@@ -31,26 +31,5 @@ function _screenHandleShowCursor( ){
 
 function _screenHandleCursorFlash( ) {
 
-/*
-  if(_appBaseGetMode( )=='edit'){
-    $cursorFlashTrigger=500000;
-  }else{
-    $cursorFlashTrigger=100000;
-
-  }
-
-    _screenHandleCursorFlash( ) ;
-
-
-    if($chighlight==1){
-      //system('tput setb 4');
-      system('tput cnorm');
-    }else{
-      //system('tput setb 0');
-      system('tput civis');
-    }
-    $chighlight*=-1;
-    //print(".");	
- */
 
 }

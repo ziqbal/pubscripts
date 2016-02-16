@@ -16,8 +16,6 @@ while( true ) {
 
     _keyboardBaseSetInput( stream_get_contents( STDIN , 1 ) ) ;
 
-    _cursorBaseUpdate( ) ;
-    
     //////////////////////////////////////////////////////////////
 
     if( _keyboardBaseHandleModeToggle( ) ) continue ;
@@ -26,7 +24,13 @@ while( true ) {
 
     if( _appBaseGetMode( ) == 'command' ) {
 
-      if( _keyboardBaseHandleMovement( ) ) continue ;
+      if( _keyboardBaseHandleMovement( ) ) {
+
+        _cursorBaseUpdate( ) ;    
+
+        continue ;
+        
+      }
 
       if( _keyboardBaseHandleQuit( ) ) break ;
 
@@ -39,6 +43,8 @@ while( true ) {
     if( _appBaseGetMode( ) == 'edit' ) {
 
       print( _keyboardBaseGetInput( ) ) ;
+      
+      _cursorBaseRight( ) ;
 
       _screenHandleShowCursor( ) ;
 
@@ -53,7 +59,6 @@ while( true ) {
   _appBaseLoop( ) ;
 
   usleep( 10000 ) ;
-
 
 }
 

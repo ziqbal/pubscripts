@@ -38,8 +38,6 @@ function _keyboardBaseHandleModeToggle( ) {
 
 	if( ord( _keyboardBaseGetInput( ) ) == 27 ) {
 
-		_cursorBaseSetDirty( true ) ;
-
 		if( _appBaseGetMode( ) == "command" ) {
 
 			_appBaseSetMode( "edit" ) ;

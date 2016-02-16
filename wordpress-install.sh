@@ -1,7 +1,8 @@
 #
-# Quickly setup a wordpress install
+# Quickly setup a wordpress multisite install
 # Handles database , config file , htaccess
 # Parameter 1 = project name
+# FIXME TODO replace web path "/_craft_/..." to ???
 #
 
 #INTERPRETER="/usr/bin/php"

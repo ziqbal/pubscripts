@@ -82,6 +82,18 @@ $WPCONFIG  = <<<END
 
 <?php
 
+
+define( 'WP_ALLOW_MULTISITE', true );
+
+/*
+define('MULTISITE', true);
+define('SUBDOMAIN_INSTALL', false);
+define('DOMAIN_CURRENT_SITE', '192.168.1.100');
+define('PATH_CURRENT_SITE', '/_craft_/wordpress{$projectname}/');
+define('SITE_ID_CURRENT_SITE', 1);
+define('BLOG_ID_CURRENT_SITE', 1);
+*/
+
 define('DB_NAME', 'wp{$projectname}');
 define('DB_USER', '$shortprojectname');
 define('DB_PASSWORD', '$shortprojectname');
@@ -90,12 +102,12 @@ define('DB_CHARSET', 'utf8mb4');
 define('DB_COLLATE', '');
 define('AUTH_KEY',         '/_TgTP8Gb)_dVa0kzmu?4--BD@1@Hk(L.k*xV)ED:3=fz9)dqoGYO&#.\${[|_}8;');
 define('SECURE_AUTH_KEY',  'Rx*1PU6+Ds8>VV@{S|w|?qHl}I 8rr:Rq]+idOAF[L*;e8~OqVc5pI9?|LOg&hN2');
-define('LOGGED_IN_KEY',    '$~VHEf2F<O){;Y{P4WD[>J^zWK2 DFq(UX-_1+iOWbJ=U3Yn0;}=Ji-UXV};t@(a');
-define('NONCE_KEY',        'J4V0?rK?t_775<CVjQ%7LDE7ksCfz8xw%0|Ut!V$!+fa<ZD8x? l[:Vo)1+Fh;_h');
+define('LOGGED_IN_KEY',    '\$~VHEf2F<O){;Y{P4WD[>J^zWK2 DFq(UX-_1+iOWbJ=U3Yn0;}=Ji-UXV};t@(a');
+define('NONCE_KEY',        'J4V0?rK?t_775<CVjQ%7LDE7ksCfz8xw%0|Ut!V\$!+fa<ZD8x? l[:Vo)1+Fh;_h');
 define('AUTH_SALT',        'omR<Cu-61t*Q><gtq9P#>dl_!YJ?);T3A81&(gE/R:,n%orgG_Tob( yA[LBrAr2');
-define('SECURE_AUTH_SALT', '=M:&eKP0GwS(NXC}pA_C[U$k#r<l*Ww(lNxiy &o%5u|O0MR9Oi<=2U{O0:/e6^7');
-define('LOGGED_IN_SALT',   '=1TH5#z$T ?*=EWuE6%IND/%s!)_SloTO8iB;r1eSNBEN*m&H>7[Om;LQpW^jGf;');
-define('NONCE_SALT',       'Pj3+#lq*%xGFg?1#-L~^ER` <=Nu|p]>H=+C0=>v53O$r5|mw1z.u C5FS~<8(-p');
+define('SECURE_AUTH_SALT', '=M:&eKP0GwS(NXC}pA_C[U\$k#r<l*Ww(lNxiy &o%5u|O0MR9Oi<=2U{O0:/e6^7');
+define('LOGGED_IN_SALT',   '=1TH5#z\$T ?*=EWuE6%IND/%s!)_SloTO8iB;r1eSNBEN*m&H>7[Om;LQpW^jGf;');
+define('NONCE_SALT',       'Pj3+#lq*%xGFg?1#-L~^ER` <=Nu|p]>H=+C0=>v53O\$r5|mw1z.u C5FS~<8(-p');
 
 \$table_prefix  = 'wptest_';
 
@@ -124,12 +136,21 @@ $htaccess = <<<END
 
 
 <IfModule mod_rewrite.c>
+
 RewriteEngine On
 RewriteBase /_craft_/wordpress{$projectname}/
 RewriteRule ^index\.php$ - [L]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /_craft_/wordpress{$projectname}/index.php [L]
+
+# add a trailing slash to /wp-admin
+RewriteRule ^([_0-9a-zA-Z-]+/)?wp-admin$ $1wp-admin/ [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+RewriteRule ^([_0-9a-zA-Z-]+/)?(wp-(content|admin|includes).*) $2 [L]
+RewriteRule ^([_0-9a-zA-Z-]+/)?(.*\.php)$ $2 [L]
+RewriteRule . index.php [L]
+
 </IfModule>
 
 END;
@@ -137,7 +158,7 @@ END;
 file_put_contents("/tmp/htaccess.txt","$htaccess");
 
 $syscmds = array();
-$syscmds[]="cd /tmp/;rm -rf wordpress;unzip $APPARCHIVE;";
+$syscmds[]="cd /tmp/;rm -rf wordpress;unzip -q $APPARCHIVE;";
 $syscmds[]="mv /tmp/wordpress ./wordpress{$projectname}";
 $syscmds[]="mkdir wordpress{$projectname}/wp-content/uploads/";
 $syscmds[]="chmod ugo+rwx wordpress{$projectname}/wp-content/uploads/";

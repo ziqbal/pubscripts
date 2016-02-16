@@ -17,5 +17,8 @@ FNAME="${FILENAME%.*}"
 
 cd $SCRIPTDIR
 
-$INTERPRETER $FNAME.php $STARTDIR "$@"
+if [ -d $FNAME ]; then
+	FNAME=$FNAME/$FNAME
+fi
 
+$INTERPRETER $FNAME.php $STARTDIR "$@"

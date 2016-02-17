@@ -6,8 +6,25 @@ function _appBase( ) {
 	_configSet( "appframe" , 0 ) ;
 	_configSet( "appmode" , "command" ) ;
 
+	// In microseconds
+	_configSet( "appsleepdelay" , 10000 ) ;
+
 }
 
+
+function _appBaseStartUp( ) {
+
+	_screenHandleClear( ) ;
+	system( 'tput civis' ) ;
+
+}
+
+function _appBaseCleanUp( ) {
+
+	_screenHandleClear( ) ;
+	_screenBaseCleanUp( ) ;
+	
+}
 
 
 function _appBaseGetMode( ) {
@@ -38,9 +55,14 @@ function _appBaseSetFrame( $v ) {
 
 function _appBaseLoop( ) {
 
-	_cursorBaseHighlightToggle( ) ;
-	
 	_appBaseSetFrame( _appBaseGetFrame( ) + 1 ) ;
+
+	_clockBaseSetAppTime( ) ;
+	
+	_screenBaseUpdate( ) ;
+	_cursorBaseUpdate( ) ;
+
+	usleep( _configGet( "appsleepdelay" ) ) ;
 
 }
 

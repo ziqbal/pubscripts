@@ -4,6 +4,9 @@
 function _logBase( ) {
 
 
+	_logBaseWrite("\n#BOOT#".date( 'l jS \of F Y h:i:s A' ));
+
+
 
 }
 

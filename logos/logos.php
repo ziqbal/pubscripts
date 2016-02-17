@@ -2,7 +2,10 @@
 
 include( "functions-boot-base.php" ) ;
 
-_screenHandleClear( ) ;
+//_screenHandleClear( ) ;
+
+
+_appBaseStartUp( ) ;
 
 while( true ) {
 
@@ -14,70 +17,17 @@ while( true ) {
 
   if( $n && in_array( STDIN , $r ) ) {
 
-    _keyboardBaseSetInput( stream_get_contents( STDIN , 1 ) ) ;
+    _appHandleInput( stream_get_contents( STDIN , 1 ) ) ;
 
-    //////////////////////////////////////////////////////////////
-
-    if( _keyboardBaseHandleModeToggle( ) ) continue ;
-
-    //////////////////////////////////////////////////////////////
-
-    if( _appBaseGetMode( ) == 'command' ) {
-
-      if( _keyboardBaseHandleMovement( ) ) {
-
-        _cursorBaseUpdate( ) ;    
-
-        continue ;
-        
-      }
-
-      if( _keyboardBaseHandleQuit( ) ) break ;
-
-      continue ;
-
-    }
-
-    //////////////////////////////////////////////////////////////
-
-    if( _appBaseGetMode( ) == 'edit' ) {
-
-
-      //if( _keyboardBaseIsTabKey( ) ) continue;
-
-      if( _keyboardBaseInputIsPrintable( ) ) {
-
-        print( _keyboardBaseGetInput( ) ) ;
-        _cursorBaseRight( ) ;
-
-      }
-
-      if( _keyboardBaseIsEnterKey( ) ) {
-
-          _cursorBaseEnter( );
-
-      }
-
-      
-
-      _screenHandleShowCursor( ) ;
-
-      _cursorBaseUpdate();
-      continue ;
-
-    }
-
-    //////////////////////////////////////////////////////////////
+    if( _configGet( "commandquit" ) ) break ;
 
   }
 
   _appBaseLoop( ) ;
 
-  usleep( 10000 ) ;
-
 }
 
-_screenBaseCleanUp( ) ;
+_appBaseCleanUp( ) ;
 
 
 

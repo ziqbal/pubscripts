@@ -25,10 +25,14 @@ function _gridBase( ) {
 	_configSet( "gridx" , 0 ) ;
 	_configSet( "gridy" , 0 ) ;
 
-	_gridBaseInit( ) ;
 
-	_gridBaseSample( ) ;
+	_gridBaseLoad("out.logos");
 
+	//_gridBaseInit( ) ;
+
+	//_gridBaseSample( ) ;
+
+	_configSet( "gridmodifytime" , _configGet("apptime")) ;
 	//_logBaseWrite(_configGet("grid"));exit;
 
 }
@@ -84,9 +88,26 @@ function _gridBaseSet( $vx , $vy , $v ) {
 
 	_configSet( "grid" , $grid ) ;
 
+	_configSet( "gridmodifytime" , _configGet("apptime")) ;
 
 }
 
+
+function _gridBaseLoad( $fn ) {
+
+	$afp = _configGet( "targetdir" )."/".$fn ;
+
+	if(file_exists($afp)){
+
+		_configSet( "grid" , json_decode( gzdecode( file_get_contents( _configGet( "targetdir" )."/".$fn ) ) , true ) ) ;
+
+	}else{
+		
+		_gridBaseInit( ) ;
+
+	}
+
+}
 
 function _gridBaseInit( ) {
 
@@ -113,13 +134,13 @@ function _gridBaseSample( ) {
 	$grid = _configGet("grid");
 
 
-	$gx = 10 ;
-	$gy = 20 ;
+	$gx = 1 ;
+	$gy = 2 ;
 
 
 
 
-	$str = "The time now is ".date( 'l jS \of F Y h:i:s A' ) ;
+	$str = date( 'l jS \of F Y h:i:s A' ) ;
 	$strLen = strlen($str);
 	for($i=0;$i<$strLen;$i++){
 

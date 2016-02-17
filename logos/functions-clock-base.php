@@ -18,16 +18,23 @@ function _clockBaseSetAppTime( ) {
 
 function _clockBaseTrigger( $key ) {
 
-	//_logBaseWrite("[$key]");
-
 	$rate = "{$key}Rate" ;
 	$last = "{$key}Last" ;
 
-	if( ( _configGet( $last ) === NULL ) || ( _configGet( $rate ) === NULL ) ) {
+	if( _configGet( $rate ) === NULL ) {
 
 		return( false ) ;
 
 	}
+
+	if( _configGet( $last ) === NULL ) {
+
+		_configSet( $last , _configGet( "apptime" ) + _configGet( $rate ) ) ;	
+
+		return( false ) ;
+
+	}
+
 
 	if( _configGet( "apptime" ) > _configGet( $last ) ) {
 

@@ -120,8 +120,17 @@ function _cursorBaseGetY( ) {
 }
 
 function _cursorBaseEnter( ) {
-	_cursorBaseSetX(0);
-	_cursorBaseDown();
+
+	system("tput setab 0");
+
+	$ch = _gridBaseGetChar(_configGet( "cursorx" )-1,_configGet( "cursory" )-1);
+	print($ch);
+
+	
+	_cursorBaseSetX(1);
+	_configSet( "cursory" , _screenBaseGoDown( _cursorBaseGetY( ) ) ) ;
+	_cursorBasePosition( ) ;
+
 
 }
 

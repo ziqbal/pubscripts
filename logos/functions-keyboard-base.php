@@ -81,34 +81,39 @@ function _keyboardBaseHandleModeToggle( ) {
 
 }
 
+function _keyboardBaseHandleSave( ) {
+
+
+}
+
 function _keyboardBaseHandleMovement( ) {
 
 	$c = _keyboardBaseGetInput( ) ;
 
 	if( $c == 'j' ) {
 
-		_cursorBaseLeft( ) ;
+		if(_configGet("cursorx")>1) _cursorBaseLeft( ) ;
 		return( true ) ;
 
 	}
 
 	if( $c == 'k' ) {
 
-		_cursorBaseRight( ) ;
+		if( _configGet( "cursorx" ) < ( _configGet("screenwidth") - 2 ) ) _cursorBaseRight( ) ;
 		return( true ) ;
 
 	}
 
 	if( $c == 'd' ) {
 
-		_cursorBaseUp( ) ;
+		if(_configGet("cursory")>1) _cursorBaseUp( ) ;
 		return( true ) ;
 
 	}
 
 	if( $c == 'f' ) {
 
-		_cursorBaseDown( ) ;
+		if( _configGet( "cursory" ) < ( _configGet("screenheight") - 2 ) ) _cursorBaseDown( ) ;
 		return( true ) ;
 
 	}

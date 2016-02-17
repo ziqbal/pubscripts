@@ -17,6 +17,17 @@ function _keyboardBaseIsEnterKey( ) {
 
 }
 
+function _keyboardBaseIsBackspaceKey( ) {
+
+	if( ord( _keyboardBaseGetInput( ) ) == 127 ) {
+		return(true);
+	}
+
+	return(false);
+
+
+}
+
 function _keyboardBaseIsTabKey( ) {
 
 	if( ord( _keyboardBaseGetInput( ) ) == 9 ) {

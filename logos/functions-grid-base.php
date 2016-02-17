@@ -49,6 +49,18 @@ function _gridBaseSetCharFromKeyboard( ) {
 
 }
 
+function _gridBaseSetChar( $inch ) {
+
+	$ch=ord($inch);
+
+	$cx = _cursorBaseGetX( ) ;
+	$cy = _cursorBaseGetY( ) ;
+
+	_gridBaseSet( $cx-1 , $cy-1 , $ch ) ;
+
+
+}
+
 function _gridBaseGet( $i , $j ) {
 
 	$grid = _configGet("grid");
@@ -102,7 +114,7 @@ function _gridBaseLoad( $fn ) {
 		_configSet( "grid" , json_decode( gzdecode( file_get_contents( _configGet( "targetdir" )."/".$fn ) ) , true ) ) ;
 
 	}else{
-		
+
 		_gridBaseInit( ) ;
 
 	}

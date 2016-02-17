@@ -5,6 +5,7 @@ function _appHandleInput( $in ) {
 
 
     _keyboardBaseSetInput( $in ) ;
+    //_logBaseWrite(ord($in));
 
     //////////////////////////////////////////////////////////////
 
@@ -56,6 +57,15 @@ function _appHandleInput( $in ) {
           _cursorBaseEnter( );
 
       }
+
+      if( _keyboardBaseIsBackspaceKey( ) ) {
+
+
+        system("tput setab 0");
+        _cursorBaseLeft( ) ;
+        _gridBaseSetChar( " " ) ;
+
+      }      
 
       //_screenHandleShowCursor( ) ;
 

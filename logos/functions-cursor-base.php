@@ -136,6 +136,10 @@ function _cursorBaseEnter( ) {
 
 function _cursorBaseLeft( ) {
 
+	if(_cursorBaseGetX( )<2){
+		return;
+	}
+
 	system("tput setab 0");
 
 	$ch = _gridBaseGetChar(_configGet( "cursorx" )-1,_configGet( "cursory" )-1);
@@ -144,6 +148,13 @@ function _cursorBaseLeft( ) {
 	system("tput cub 2");
 
 	_configSet( "cursorx" , _screenBaseGoLeft( _cursorBaseGetX( ) ) ) ;
+
+}
+
+function _cursorBaseLeftNoPrint( ) {
+
+	_cursorBaseSetX( _screenBaseGoLeft( _cursorBaseGetX( ) ) ) ;
+	_cursorBasePosition( ) ;
 
 }
 
@@ -173,6 +184,7 @@ function _cursorBaseRightNoPrint( ) {
 
 
 	_cursorBaseSetX( _screenBaseGoRight( _cursorBaseGetX( ) ) ) ;
+	_cursorBasePosition( ) ;
 
 	//_logBaseWrite(_cursorBaseGetX());
 

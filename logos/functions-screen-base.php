@@ -46,7 +46,7 @@ function _screenBaseGoRight( $x ) {
 
 	$width = _screenBaseGetWidth( ) ;
 
-	if( $x >= $width ) $x = $width - 1 ;
+	if( $x >= ($width-2) ) $x = $width - 2 ;
 
 	return( $x ) ;
 
@@ -56,7 +56,7 @@ function _screenBaseGoLeft( $x ) {
 
 	$x-- ;
 
-	if( $x < 0 ) $x = 0 ;
+	if( $x < 1 ) $x = 1 ;
 
 	return( $x ) ;
 
@@ -68,7 +68,7 @@ function _screenBaseGoDown( $y ) {
 
 	$height = _screenBaseGetHeight( ) ;
 
-	if( $y >= $height ) $y = $height - 1 ;
+	if( $y >= ($height-2) ) $y = $height - 2 ;
 
 	return( $y ) ;
 
@@ -78,7 +78,7 @@ function _screenBaseGoUp( $y ) {
 
 	$y-- ;
 
-	if( $y < 0 ) $y = 0 ;
+	if( $y < 1 ) $y = 1 ;
 
 	return( $y ) ;
 

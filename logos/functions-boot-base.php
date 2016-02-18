@@ -10,11 +10,13 @@ include( "functions-screen-handle.php" ) ;
 include( "functions-cursor-base.php" ) ;
 include( "functions-keyboard-base.php" ) ;
 include( "functions-clock-base.php" ) ;
+include( "functions-mode-base.php" ) ;
+include( "functions-mode-command.php" ) ;
+include( "functions-mode-edit.php" ) ;
 
 _bootBase( ) ;
 
 function _bootBase( ) {
-
 
 	date_default_timezone_set( 'UTC' ) ;
 
@@ -26,7 +28,7 @@ function _bootBase( ) {
 	_cursorBase( ) ;
 	_keyboardBase( ) ;
 	_clockBase( ) ;
-
+	_modeBase( ) ;
 
 }
 

@@ -2,9 +2,6 @@
 
 include( "functions-boot-base.php" ) ;
 
-//_screenHandleClear( ) ;
-
-
 _appBaseStartUp( ) ;
 
 while( true ) {
@@ -17,17 +14,19 @@ while( true ) {
 
   if( $n && in_array( STDIN , $r ) ) {
 
-    _appHandleInput( stream_get_contents( STDIN , 1 ) ) ;
+    _keyboardBasePushInput( ord( stream_get_contents( STDIN , 1 ) ) ) ;
 
-    if( _configGet( "commandquit" ) ) break ;
+    //if( _configBaseGet( "commandquit" ) ) break ;
+
+  } else {
+
+	//_appHandleInput( stream_get_contents( STDIN , 1 ) ) ;
+
+	  if( !_appBaseLoop( ) ) break ;
 
   }
 
-  _appBaseLoop( ) ;
 
 }
 
 _appBaseCleanUp( ) ;
-
-
-

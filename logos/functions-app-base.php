@@ -3,13 +3,13 @@
 
 function _appBase( ) {
 
-	_configSet( "appframe" , 0 ) ;
-	_configSet( "appmode" , "command" ) ;
+	_configBaseSet( "appframe" , 0 ) ;
+	_configBaseSet( "appmode" , "command" ) ;
 
 	// In microseconds
-	_configSet( "appsleepdelay" , 10000 ) ;
-	_configSet( "_appBaseSaveRate" , 3 ) ;
-	//_configSet( "_appBaseSaveLast" , 0 ) ;
+	_configBaseSet( "appsleepdelay" , 10000 ) ;
+	_configBaseSet( "_appBaseSaveRate" , 3 ) ;
+	//_configBaseSet( "_appBaseSaveLast" , 0 ) ;
 
 }
 
@@ -33,26 +33,26 @@ function _appBaseCleanUp( ) {
 
 function _appBaseGetMode( ) {
 
-	return( _configGet( "appmode" ) ) ;
+	return( _configBaseGet( "appmode" ) ) ;
 
 }
 
 function _appBaseSetMode( $v ) {
 
-	return( _configSet( "appmode" , $v ) ) ;
+	return( _configBaseSet( "appmode" , $v ) ) ;
 
 }
 
 function _appBaseGetFrame( ) {
 
-	return( _configGet( "appframe" ) ) ;
+	return( _configBaseGet( "appframe" ) ) ;
 
 }
 
 
 function _appBaseSetFrame( $v ) {
 
-	return( _configSet( "appframe" , $v ) ) ;
+	return( _configBaseSet( "appframe" , $v ) ) ;
 
 }
 
@@ -61,17 +61,14 @@ function _appBaseSave( ) {
 
 	if( _clockBaseTrigger( __FUNCTION__ ) ) {
 
-		if(_configGet("gridmodifytime")==-1) return;
+		if(_configBaseGet("gridmodifytime")==-1) return;
 
-		if( ( _configGet("apptime") - _configGet("gridmodifytime") ) > 3 ){
+		if( ( _configBaseGet("apptime") - _configBaseGet("gridmodifytime") ) > 3 ){
 
 			_logBaseWrite( __FUNCTION__ ) ;
-			_configSet("gridmodifytime",-1);
+			_configBaseSet("gridmodifytime",-1);
 
-
-			$data = gzencode( json_encode( _configGet("grid") ) , 9 );
-//			_logBaseWrite($data);
-			file_put_contents(_configGet( "targetdir")."/out.logos" , $data ) ;
+			_appBaseSaveSession( ) ;
 
 
 		}
@@ -86,16 +83,34 @@ function _appBaseSave( ) {
 function _appBaseForceSave( ) {
 
 	_logBaseWrite(__FUNCTION__);
-	if(_configGet("gridmodifytime")==-1) return;
+	//if(_configBaseGet("gridmodifytime")==-1) return;
 
-	_configSet("gridmodifytime",-1);
-	$data = gzencode( json_encode( _configGet("grid") ) , 9 );
-	file_put_contents(_configGet( "targetdir")."/out.logos" , $data ) ;
+	_configBaseSet("gridmodifytime",-1);
 
 
-	_configSet("gridmodifytime",-1);
+	_appBaseSaveSession( ) ;
+
+	_configBaseSet("gridmodifytime",-1);
 
 
+
+}
+
+function _appBaseSaveSession( ) {
+
+	$data = array( ) ;
+	$data[ 'grid' ] = _configBaseGet( "grid" ) ;
+
+	$config = array( ) ;
+	$config['cursor']['x']=_cursorBaseGetX();
+	$config['cursor']['y']=_cursorBaseGetY();
+
+	$data['config']=$config;
+
+	//_logBaseWrite($config);
+
+	$data = gzencode( json_encode( $data ) , 9 ) ;
+	file_put_contents( _configBaseGet( "targetdir")."/out.logos" , $data ) ;	
 
 }
 
@@ -104,13 +119,19 @@ function _appBaseLoop( ) {
 
 	_appBaseSetFrame( _appBaseGetFrame( ) + 1 ) ;
 
+	_appHandleInput( ) ;
+
 	_clockBaseSetAppTime( ) ;
 	
 	_screenBaseUpdate( ) ;
 	_cursorBaseUpdate( ) ;
 	_appBaseSave( ) ;
 
-	usleep( _configGet( "appsleepdelay" ) ) ;
+	usleep( _configBaseGet( "appsleepdelay" ) ) ;
+
+	if( _keyboardBaseHandleQuit( ) && ( _appBaseGetMode( ) == "command" ) ) return( false ) ;
+
+	return( true ) ;
 
 }
 

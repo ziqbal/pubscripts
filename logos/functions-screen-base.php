@@ -10,9 +10,9 @@ function _screenBase( ) {
 
 
 	// In seconds e.g. 1.5
-	_configSet( "_screenBaseUpdateRate" , 0.1 ) ;
-	_configSet( "_screenBaseUpdateLast" , 0 ) ;
-	_configSet( "_screenBaseViewDirty" , true ) ;
+	_configBaseSet( "_screenBaseUpdateRate" , 0.1 ) ;
+	_configBaseSet( "_screenBaseUpdateLast" , 0 ) ;
+	_configBaseSet( "_screenBaseViewDirty" , true ) ;
 
 
 }
@@ -22,21 +22,21 @@ function _screenBaseUpdateDimensions( ) {
 
 	$dimensions = _screenHandleGetDimensions( ) ;
 
-	_configSet( "screenwidth" , $dimensions[ 'screenwidth' ] ) ;
-	_configSet( "screenheight" , $dimensions[ 'screenheight' ] ) ;
+	_configBaseSet( "screenwidth" , $dimensions[ 'screenwidth' ] ) ;
+	_configBaseSet( "screenheight" , $dimensions[ 'screenheight' ] ) ;
 
 }
 
 function _screenBaseGetWidth( ) {
 
-	return( _configGet( "screenwidth" ) ) ;
+	return( _configBaseGet( "screenwidth" ) ) ;
 
 }
 
 
 function _screenBaseGetHeight( ) {
 
-	return( _configGet( "screenheight" ) ) ;
+	return( _configBaseGet( "screenheight" ) ) ;
 
 }
 
@@ -96,12 +96,12 @@ function _screenBaseCleanUp( ) {
 
 function _screenBaseViewUpdate( ) {
 
-	if( _configGet( "_screenBaseViewDirty" ) ) {
+	if( _configBaseGet( "_screenBaseViewDirty" ) ) {
 
 
 		$viewx=0;$viewy=0;
-		$viewwidth=_configGet( "screenwidth" )-2;
-		$viewheight=_configGet( "screenheight" )-2;
+		$viewwidth=_configBaseGet( "screenwidth" )-2;
+		$viewheight=_configBaseGet( "screenheight" )-2;
 
 
 		//_logBaseWrite("$viewwidth  $viewheight");
@@ -133,7 +133,7 @@ function _screenBaseViewUpdate( ) {
 		_cursorBasePosition( ) ;		
 
 
-		_configSet( "_screenBaseViewDirty" , false ) ;
+		_configBaseSet( "_screenBaseViewDirty" , false ) ;
 
 
 	}
@@ -161,7 +161,7 @@ function _screenBaseUpdate( ) {
 
 function _screenBaseDebug( ) {
 
-	print( _configGet( "screenwidth" )." x "._configGet( "screenheight" ) ) ;
+	print( _configBaseGet( "screenwidth" )." x "._configBaseGet( "screenheight" ) ) ;
 
 }
 

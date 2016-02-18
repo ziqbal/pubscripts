@@ -33,3 +33,15 @@ function _screenHandleCursorFlash( ) {
 
 
 }
+
+function _screenHandleShowGridChar( ) {
+
+		$ch = _gridBaseGetChar(_configBaseGet( "cursorx" )-1,_configBaseGet( "cursory" )-1);
+		print($ch);
+
+		$cy = _cursorBaseGetY( ) ;
+		$cx = _cursorBaseGetX( ) ;
+		system( "tput cup $cy $cx" ) ;
+
+
+}

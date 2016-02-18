@@ -19,35 +19,34 @@ H = Highlight/Bold [bold]
 
 function _gridBase( ) {
 
-	_configSet( "gridwidth" , 708 ) ;
-	_configSet( "gridheight" , 168 ) ;
+	_configBaseSet( "gridwidth" , 708 ) ;
+	_configBaseSet( "gridheight" , 168 ) ;
 
-	_configSet( "gridx" , 0 ) ;
-	_configSet( "gridy" , 0 ) ;
+	_configBaseSet( "gridx" , 0 ) ;
+	_configBaseSet( "gridy" , 0 ) ;
 
 
-	_gridBaseLoad("out.logos");
+	_gridBaseLoad( "out.logos" ) ;
 
 	//_gridBaseInit( ) ;
 
 	//_gridBaseSample( ) ;
 
-	_configSet( "gridmodifytime" , _configGet("apptime")) ;
-	//_logBaseWrite(_configGet("grid"));exit;
+	_configBaseSet( "gridmodifytime" , _configBaseGet("apptime")) ;
+	//_logBaseWrite(_configBaseGet("grid"));exit;
 
 }
 
-function _gridBaseSetCharFromKeyboard( ) {
-
-	$ch=ord(_keyboardBaseGetInput());
+function _gridBaseSetByte( $byte ) {
 
 	$cx = _cursorBaseGetX( ) ;
 	$cy = _cursorBaseGetY( ) ;
 
-	_gridBaseSet( $cx-1 , $cy-1 , $ch ) ;
+	_gridBaseSet( $cx-1 , $cy-1 , $byte ) ;
 
 
 }
+
 
 function _gridBaseSetChar( $inch ) {
 
@@ -63,10 +62,10 @@ function _gridBaseSetChar( $inch ) {
 
 function _gridBaseGet( $i , $j ) {
 
-	$grid = _configGet("grid");
+	$grid = _configBaseGet("grid");
 
-	$gx = _configGet( "gridx" ) ;
-	$gy = _configGet( "gridy" ) ;
+	$gx = _configBaseGet( "gridx" ) ;
+	$gy = _configBaseGet( "gridy" ) ;
 	return($grid[$i+$gx][$j+$gy]);
 
 
@@ -74,10 +73,10 @@ function _gridBaseGet( $i , $j ) {
 
 function _gridBaseGetChar( $i , $j ) {
 
-	$grid = _configGet("grid");
+	$grid = _configBaseGet("grid");
 
-	$gx = _configGet( "gridx" ) ;
-	$gy = _configGet( "gridy" ) ;
+	$gx = _configBaseGet( "gridx" ) ;
+	$gy = _configBaseGet( "gridy" ) ;
 
 	$v=$grid[$i+$gx][$j+$gy];
 
@@ -90,28 +89,34 @@ function _gridBaseGetChar( $i , $j ) {
 
 function _gridBaseSet( $vx , $vy , $v ) {
 
-	$grid = _configGet("grid");
+	$grid = _configBaseGet("grid");
 
-	$gx = _configGet( "gridx" ) ;
-	$gy = _configGet( "gridy" ) ;
+	$gx = _configBaseGet( "gridx" ) ;
+	$gy = _configBaseGet( "gridy" ) ;
 
 	//_logBaseWrite("[$vx+$gx][$vy+$gy]=$v");
 	$grid[$vx+$gx][$vy+$gy]=$v;
 
-	_configSet( "grid" , $grid ) ;
+	_configBaseSet( "grid" , $grid ) ;
 
-	_configSet( "gridmodifytime" , _configGet("apptime")) ;
+	_configBaseSet( "gridmodifytime" , _configBaseGet("apptime")) ;
 
 }
 
 
 function _gridBaseLoad( $fn ) {
 
-	$afp = _configGet( "targetdir" )."/".$fn ;
+	$afp = _configBaseGet( "targetdir" )."/".$fn ;
 
-	if(file_exists($afp)){
+	if( file_exists( $afp ) ) {
 
-		_configSet( "grid" , json_decode( gzdecode( file_get_contents( _configGet( "targetdir" )."/".$fn ) ) , true ) ) ;
+		system("cp $afp $afp.".time());
+
+		$data = json_decode( gzdecode( file_get_contents( _configBaseGet( "targetdir" )."/".$fn ) ) , true ) ;
+		_configBaseSet( "grid" , $data['grid'] );
+		$config = $data['config'] ;
+		_configBaseQuery("config",$config);
+		
 
 	}else{
 
@@ -125,9 +130,9 @@ function _gridBaseInit( ) {
 
 	$grid = array( ) ;
 
-	for( $x = 0 ; $x < _configGet( "gridwidth" ) ; $x++ ) {
+	for( $x = 0 ; $x < _configBaseGet( "gridwidth" ) ; $x++ ) {
 
-	  for( $y = 0 ; $y < _configGet( "gridheight" ) ; $y++ ) {
+	  for( $y = 0 ; $y < _configBaseGet( "gridheight" ) ; $y++ ) {
 
 	    $grid[ $x ][ $y ] = -1 ;
 
@@ -135,7 +140,7 @@ function _gridBaseInit( ) {
 	  
 	}
 
-	_configSet( "grid" , $grid ) ;
+	_configBaseSet( "grid" , $grid ) ;
 
 }
 
@@ -143,7 +148,7 @@ function _gridBaseInit( ) {
 function _gridBaseSample( ) {
 
 
-	$grid = _configGet("grid");
+	$grid = _configBaseGet("grid");
 
 
 	$gx = 1 ;
@@ -162,7 +167,7 @@ function _gridBaseSample( ) {
 
 	//_logBaseWrite($grid[$gx]);exit;
 
-	_configSet("grid",$grid);
+	_configBaseSet("grid",$grid);
 
 
 }

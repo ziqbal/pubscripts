@@ -4,14 +4,24 @@
 
 function _cursorBase( ) {
 
-	_configSet( "cursorx" , 1 ) ;
-	_configSet( "cursory" , 1 ) ;
-	_configSet( "cursordirty" , true ) ;
+	_configBaseSet( "cursorx" , 1 ) ;
+	_configBaseSet( "cursory" , 1 ) ;
 
-	_configSet( "cursorbackground" , 0 ) ;
 
-	_configSet( "_cursorBaseUpdateRate" , 0.1 ) ;
-	_configSet( "_cursorBaseUpdateLast" , 0 ) ;
+	$config=_configBaseGet("config");
+	//_logBaseWrite($config);
+	if(isset($config['cursor'])){
+		_configBaseSet( "cursorx" , $config['cursor']['x'] ) ;
+		_configBaseSet( "cursory" , $config['cursor']['y'] ) ;
+
+	}
+
+	_configBaseSet( "cursordirty" , true ) ;
+
+	_configBaseSet( "cursorbackground" , 0 ) ;
+
+	_configBaseSet( "_cursorBaseUpdateRate" , 0.1 ) ;
+	_configBaseSet( "_cursorBaseUpdateLast" , 0 ) ;
 
 
 
@@ -19,49 +29,42 @@ function _cursorBase( ) {
 
 function _cursorBaseUpdate( ) {
 
-
-
 	if( _clockBaseTrigger( __FUNCTION__ ) ) {
 
-		//_logBaseWrite( "YEA" ) ;
 
+		$cbg = _configBaseGet( "cursorbackground" ) + 1 ;
+		if( $cbg == 8 ) $cbg = 1 ;
 
-		$cbg = _configGet( "cursorbackground" ) + 1 ;
-		if($cbg==8)$cbg=1;
+		if( _configBaseGet( "appmode" ) == "edit" ) {
 
-		if(_configget("appmode")=="edit"){
-			if($cbg>1)$cbg=0;
+			if( $cbg > 1 ) $cbg = 0 ;
+
+			if($cbg==1) {
+				system("tput smso");
+			} else {
+				system("tput rmso");
+			}
 
 		}
-	_configSet( "cursorbackground" , $cbg ) ;
 
-		system("tput setab $cbg");
+		if( _configBaseGet( "appmode" ) == "command" ) {
 
-	$ch = _gridBaseGetChar(_configGet( "cursorx" )-1,_configGet( "cursory" )-1);
-	print($ch);
+			//if( $cbg > 1 ) $cbg = 0 ;
 
-		$cy = _cursorBaseGetY( ) ;
-		$cx = _cursorBaseGetX( ) ;
-		system( "tput cup $cy $cx" ) ;
+			//system("tput smso");
+			system("tput setab $cbg");
+
+		}		
 
 
+
+		_screenHandleShowGridChar( ) ;
+
+		_configBaseSet( "cursorbackground" , $cbg ) ;
 
 	}
 
 
-
-	/*
-
-	$cy = _cursorBaseGetY( ) ;
-	$cx = _cursorBaseGetX( ) ;
-
-	//_logBaseWrite($cx);
-
-	system( "tput cup $cy $cx" ) ;
-	system( 'tput cnorm' ) ;	
-
-	_cursorBaseSetDirty( false ) ;
-	*/
 
 }
 
@@ -82,40 +85,40 @@ function _cursorBaseIsDirty( ) {
 
 function _cursorBaseGetDirty( ) {
 
-	return( _configGet( "cursordirty" ) ) ;
+	return( _configBaseGet( "cursordirty" ) ) ;
 	
 }
 
 function _cursorBaseSetDirty( $v ) {
 
-	_configSet( "cursordirty" , $v )  ;
+	_configBaseSet( "cursordirty" , $v )  ;
 	
 }
 
 
 function _cursorBaseSetX( $v ) {
 
-	_configSet( "cursorx" , $v ) ;
+	_configBaseSet( "cursorx" , $v ) ;
 
 }
 
 function _cursorBaseSetY( $v ) {
 
-	_configSet( "cursory" , $v ) ;
+	_configBaseSet( "cursory" , $v ) ;
 
 }
 
 
 function _cursorBaseGetX( ) {
 
-	return( _configGet( "cursorx" ) ) ;
+	return( _configBaseGet( "cursorx" ) ) ;
 
 }
 
 
 function _cursorBaseGetY( ) {
 
-	return( _configGet( "cursory" ) ) ;
+	return( _configBaseGet( "cursory" ) ) ;
 	
 }
 
@@ -123,12 +126,12 @@ function _cursorBaseEnter( ) {
 
 	system("tput setab 0");
 
-	$ch = _gridBaseGetChar(_configGet( "cursorx" )-1,_configGet( "cursory" )-1);
+	$ch = _gridBaseGetChar(_configBaseGet( "cursorx" )-1,_configBaseGet( "cursory" )-1);
 	print($ch);
 
 	
 	_cursorBaseSetX(1);
-	_configSet( "cursory" , _screenBaseGoDown( _cursorBaseGetY( ) ) ) ;
+	_configBaseSet( "cursory" , _screenBaseGoDown( _cursorBaseGetY( ) ) ) ;
 	_cursorBasePosition( ) ;
 
 
@@ -142,12 +145,12 @@ function _cursorBaseLeft( ) {
 
 	system("tput setab 0");
 
-	$ch = _gridBaseGetChar(_configGet( "cursorx" )-1,_configGet( "cursory" )-1);
+	$ch = _gridBaseGetChar(_configBaseGet( "cursorx" )-1,_configBaseGet( "cursory" )-1);
 	print($ch);
 
 	system("tput cub 2");
 
-	_configSet( "cursorx" , _screenBaseGoLeft( _cursorBaseGetX( ) ) ) ;
+	_configBaseSet( "cursorx" , _screenBaseGoLeft( _cursorBaseGetX( ) ) ) ;
 
 }
 
@@ -163,7 +166,7 @@ function _cursorBaseRight( ) {
 
 	//system("tput sab 0;echo ' ';tput cub1");
 	system("tput setab 0");
-	$ch = _gridBaseGetChar(_configGet( "cursorx" )-1,_configGet( "cursory" )-1);
+	$ch = _gridBaseGetChar(_configBaseGet( "cursorx" )-1,_configBaseGet( "cursory" )-1);
 	print($ch);
 	//system("tput cub1");
 
@@ -197,10 +200,10 @@ function _cursorBaseUp( ) {
 
 	system("tput setab 0");
 
-	$ch = _gridBaseGetChar(_configGet( "cursorx" )-1,_configGet( "cursory" )-1);
+	$ch = _gridBaseGetChar(_configBaseGet( "cursorx" )-1,_configBaseGet( "cursory" )-1);
 	print($ch);
 
-	_configSet( "cursory" , _screenBaseGoUp( _cursorBaseGetY( ) ) ) ;
+	_configBaseSet( "cursory" , _screenBaseGoUp( _cursorBaseGetY( ) ) ) ;
 	_cursorBasePosition( ) ;
 
 }
@@ -210,10 +213,10 @@ function _cursorBaseDown( ) {
 
 	system("tput setab 0");
 
-	$ch = _gridBaseGetChar(_configGet( "cursorx" )-1,_configGet( "cursory" )-1);
+	$ch = _gridBaseGetChar(_configBaseGet( "cursorx" )-1,_configBaseGet( "cursory" )-1);
 	print($ch);
 
-	_configSet( "cursory" , _screenBaseGoDown( _cursorBaseGetY( ) ) ) ;
+	_configBaseSet( "cursory" , _screenBaseGoDown( _cursorBaseGetY( ) ) ) ;
 	_cursorBasePosition( ) ;
 
 }

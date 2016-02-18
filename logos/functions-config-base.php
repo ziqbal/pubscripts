@@ -13,9 +13,9 @@ function _configBaseInit( ) {
 
 	global $argv ;
 
-	_configSet( "originalargs" , $argv ) ;
-	_configSet( "targetdir" , $argv[ 1 ] ) ;
-	_configSet( "scriptdir" , __DIR__ ) ;
+	_configBaseSet( "originalargs" , $argv ) ;
+	_configBaseSet( "targetdir" , $argv[ 1 ] ) ;
+	_configBaseSet( "scriptdir" , __DIR__ ) ;
 
 }
 
@@ -27,7 +27,22 @@ function _configBaseDebug( ) {
 
 }
 
-function _configSet( $k , $v ) {
+function _configBaseQuery(  ) {
+
+	$args = func_get_args( ) ;
+
+
+	if( count( $args ) == 1 ) {
+
+		return( _configBaseGet( $args[ 0 ] ) ) ;
+
+	}
+
+	_configBaseSet( $args[ 0 ] , $args[ 1 ] ) ;
+
+} 
+
+function _configBaseSet( $k , $v ) {
 
 	global $_CONFIG_ ;
 
@@ -35,7 +50,7 @@ function _configSet( $k , $v ) {
 
 } 
 
-function _configGet( $k ) {
+function _configBaseGet( $k ) {
 
 	global $_CONFIG_ ;
 

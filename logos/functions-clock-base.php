@@ -9,7 +9,7 @@ function _clockBase( ) {
 
 function _clockBaseSetAppTime( ) {
 
-	_configSet( "apptime" , microtime( true ) ) ;
+	_configBaseSet( "apptime" , microtime( true ) ) ;
 
 
 
@@ -21,24 +21,24 @@ function _clockBaseTrigger( $key ) {
 	$rate = "{$key}Rate" ;
 	$last = "{$key}Last" ;
 
-	if( _configGet( $rate ) === NULL ) {
+	if( _configBaseGet( $rate ) === NULL ) {
 
 		return( false ) ;
 
 	}
 
-	if( _configGet( $last ) === NULL ) {
+	if( _configBaseGet( $last ) === NULL ) {
 
-		_configSet( $last , _configGet( "apptime" ) + _configGet( $rate ) ) ;	
+		_configBaseSet( $last , _configBaseGet( "apptime" ) + _configBaseGet( $rate ) ) ;	
 
 		return( false ) ;
 
 	}
 
 
-	if( _configGet( "apptime" ) > _configGet( $last ) ) {
+	if( _configBaseGet( "apptime" ) > _configBaseGet( $last ) ) {
 
-		_configSet( $last , _configGet( "apptime" ) + _configGet( $rate ) ) ;
+		_configBaseSet( $last , _configBaseGet( "apptime" ) + _configBaseGet( $rate ) ) ;
 
 		return( true ) ;
 

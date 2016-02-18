@@ -4,13 +4,27 @@
 function _keyboardBase( ) {
 
 
+	//_configBaseSet("keyboardbuffer",array());
+
+	_configBaseQuery( "keyboardbuffer" , array( ) ) ;
+
+
+
+
 }
 
 function _keyboardBaseIsEnterKey( ) {
 
-	if( ord( _keyboardBaseGetInput( ) ) == 10 ) {
+
+	$byte = _keyboardBasePullInput( ) ;
+
+	if( $byte == 10 ) {
+
 		return(true);
 	}
+
+
+	_keyboardBasePushInput( $byte ) ;
 
 	return(false);
 
@@ -19,58 +33,94 @@ function _keyboardBaseIsEnterKey( ) {
 
 function _keyboardBaseIsBackspaceKey( ) {
 
-	if( ord( _keyboardBaseGetInput( ) ) == 127 ) {
+
+	$byte = _keyboardBasePullInput( ) ;
+
+	if( $byte == 127 ) {
+
 		return(true);
 	}
 
-	return(false);
+
+	_keyboardBasePushInput( $byte ) ;
+
+	return(false);	
+
 
 
 }
 
 function _keyboardBaseIsTabKey( ) {
 
-	if( ord( _keyboardBaseGetInput( ) ) == 9 ) {
+	$byte = _keyboardBasePullInput( ) ;
+
+	if( $byte == 9 ) {
+
 		return(true);
 	}
 
-	return(false);
+
+	_keyboardBasePushInput( $byte ) ;
+
+	return(false);	
+
+
 
 
 }
 
 
-function _keyboardBaseSetInput( $c ) {
+function _keyboardBasePushInput( $byte ) {
 
-	_configSet( "keyboardinput" , $c ) ;
+	$kb = _configBaseQuery( "keyboardbuffer" ) ;
+	array_unshift( $kb ,  $byte ) ;	
+	_configBaseQuery( "keyboardbuffer" , $kb ) ;
+
+	//_logBaseWrite($kb);
 
 }
 
-function _keyboardBaseGetInput( ) {
+function _keyboardBasePullInput( ) {
 
-	return( _configGet( "keyboardinput" ) ) ;
-	
+	$kb = _configBaseQuery( "keyboardbuffer" ) ;
+	if(count($kb)==0) return(NULL);
+
+	$byte = array_shift( $kb ) ;	
+
+	_configBaseQuery( "keyboardbuffer" , $kb ) ;
+
+	return( $byte ) ;
+
 }
+
 
 function _keyboardBaseHandleQuit( ) {
 
-	$c = _keyboardBaseGetInput( ) ;
+//	if( _appBaseGetMode( ) == "edit" ) return( false ) ;
 
-	if( $c == 'q' ) {
+	$byte = _keyboardBasePullInput( ) ;
 
-		return( true ) ;
+	if( chr($byte) == 'q' ) {
 
+		return(true);
 	}
 
-	return( false ) ;
+
+	_keyboardBasePushInput( $byte ) ;
+
+	return(false);	
+
+
 
 }
 
 function _keyboardBaseHandleModeToggle( ) {
 
-	$c = _keyboardBaseGetInput( ) ;
 
-	if( ord( _keyboardBaseGetInput( ) ) == 27 ) {
+	$byte = _keyboardBasePullInput( ) ;
+
+
+	if( $byte == 27 ) {
 
 		if( _appBaseGetMode( ) == "command" ) {
 
@@ -88,6 +138,8 @@ function _keyboardBaseHandleModeToggle( ) {
 
 	}
 
+	_keyboardBasePushInput( $byte ) ;
+
 	return( false ) ;
 
 }
@@ -99,49 +151,62 @@ function _keyboardBaseHandleSave( ) {
 
 function _keyboardBaseHandleMovement( ) {
 
-	$c = _keyboardBaseGetInput( ) ;
+	$byte = _keyboardBasePullInput( ) ;
 
-	if( $c == 'j' ) {
+	if( chr($byte) == 'j' ) {
 
-		if(_configGet("cursorx")>1) _cursorBaseLeft( ) ;
+		if(_configBaseGet("cursorx")>1) _cursorBaseLeft( ) ;
 		return( true ) ;
 
 	}
 
-	if( $c == 'k' ) {
+	if( chr($byte) == 'k' ) {
 
-		if( _configGet( "cursorx" ) < ( _configGet("screenwidth") - 2 ) ) _cursorBaseRight( ) ;
+		if( _configBaseGet( "cursorx" ) < ( _configBaseGet("screenwidth") - 2 ) ) _cursorBaseRight( ) ;
 		return( true ) ;
 
 	}
 
-	if( $c == 'd' ) {
+	if( chr($byte) == 'd' ) {
 
-		if(_configGet("cursory")>1) _cursorBaseUp( ) ;
+		if(_configBaseGet("cursory")>1) _cursorBaseUp( ) ;
 		return( true ) ;
 
 	}
 
-	if( $c == 'f' ) {
+	if( chr($byte) == 'f' ) {
 
-		if( _configGet( "cursory" ) < ( _configGet("screenheight") - 2 ) ) _cursorBaseDown( ) ;
+		if( _configBaseGet( "cursory" ) < ( _configBaseGet("screenheight") - 2 ) ) _cursorBaseDown( ) ;
 		return( true ) ;
 
 	}
+
+	_keyboardBasePushInput( $byte ) ;
 
 	return( false ) ;
 
 }
 
+function _keyboardBasePeek( ) {
+
+	$byte = _keyboardBasePullInput( ) ;
+
+	_keyboardBasePushInput( $byte ) ;
+
+	return($byte);
+
+
+
+}
 
 function _keyboardBaseInputIsPrintable( ) {
 
-	$c = _keyboardBaseGetInput( ) ;
+	$byte = _keyboardBasePeek( ) ;
 
-	if(ord($c)<32) return(false);
-	if(ord($c)>126) return(false);
-	return(true);
+	if($byte===NULL) return(false);
 
+	if( ( $byte > 31 ) && ( $byte < 127 ) ) return( true ) ;
 
+	return( false ) ;
 
 }

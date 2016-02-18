@@ -109,11 +109,23 @@ function _appBaseSaveSession( ) {
 
 	//_logBaseWrite($config);
 
-	$data = gzencode( json_encode( $data ) , 9 ) ;
-	file_put_contents( _configBaseGet( "targetdir")."/out.logos" , $data ) ;	
+	$encoded = _appBaseEncrypt( base64_encode( gzencode( json_encode( $data ) , 9 ) ) ) ;
+
+	file_put_contents( _configBaseGet( "targetdir")."/out.logos" , $encoded ) ;	
 
 }
 
+function _appBaseEncrypt( $data ) {
+
+	return($data);
+
+}
+
+function _appBaseDecrypt( $data ) {
+
+	return($data);
+
+}
 
 function _appBaseLoop( ) {
 

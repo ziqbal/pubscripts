@@ -112,7 +112,10 @@ function _gridBaseLoad( $fn ) {
 
 		system("cp $afp $afp.".time());
 
-		$data = json_decode( gzdecode( file_get_contents( _configBaseGet( "targetdir" )."/".$fn ) ) , true ) ;
+		$data = json_decode( gzdecode( base64_decode( file_get_contents( _configBaseGet( "targetdir" )."/".$fn ) ) ) , true ) ;
+
+		$data=_appBaseDecrypt($data);
+
 		_configBaseSet( "grid" , $data['grid'] );
 		$config = $data['config'] ;
 		_configBaseQuery("config",$config);

@@ -2,7 +2,13 @@
 # Crazy! My Own Editor! In PHP!
 # Well there is an itch I gotta scratch.
 # Also known as Meditations.
-# Parameter 1 = filename
+#
+# Installation for linux:
+# sudo apt-get install libsodium-dev php-pear php5-dev
+# sudo pecl install libsodium
+# php --ini
+# sudo vim /etc/php5/cli/php.ini
+# More help: https://paragonie.com/book/pecl-libsodium/read/00-intro.md
 #
 
 INTERPRETER="/usr/bin/php"

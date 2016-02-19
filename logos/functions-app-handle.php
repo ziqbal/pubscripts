@@ -7,14 +7,6 @@ function _appHandleInput( ) {
     //////////////////////////////////////////////////////////////
 
 
-    if( _keyboardBaseHandleLoad( ) ) {
-
-      _configBaseQuery( "_screenBaseViewDirty" , true ) ;
-
-      return ;
-
-    }
-
     if( _keyboardBaseHandleModeToggle( ) ) {
 
       system( "tput rmso" ) ;

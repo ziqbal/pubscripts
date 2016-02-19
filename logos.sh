@@ -3,11 +3,12 @@
 # Well there is an itch I gotta scratch.
 # Also known as Meditations.
 #
-# Installation for linux:
+# Prerequisites for linux:
 # sudo apt-get install libsodium-dev php-pear php5-dev
 # sudo pecl install libsodium
 # php --ini
 # sudo vim /etc/php5/cli/php.ini
+# extension=libsodium.so
 # More help: https://paragonie.com/book/pecl-libsodium/read/00-intro.md
 #
 

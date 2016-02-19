@@ -17,6 +17,9 @@ function _configBaseInit( ) {
 	_configBaseSet( "targetdir" , $argv[ 1 ] ) ;
 	_configBaseSet( "scriptdir" , __DIR__ ) ;
 
+	_configBaseQuery( "loaded" , false ) ;
+
+
 }
 
 function _configBaseDebug( ) {

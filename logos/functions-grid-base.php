@@ -37,6 +37,7 @@ function _gridBase( ) {
 
 }
 
+
 function _gridBaseSetByte( $byte ) {
 
 	$cx = _cursorBaseGetX( ) ;
@@ -46,6 +47,30 @@ function _gridBaseSetByte( $byte ) {
 
 
 }
+
+
+function _gridBaseQuery( ) {
+
+	// $x, $y , $z
+
+	$grid = _configBaseGet( "grid" ) ;
+
+	$args = func_get_args( ) ;
+
+
+	if( count( $args ) == 2 ) {
+
+		return( $grid[ $args[ 0 ] ][ $args[ 1 ] ] ) ;
+
+	}
+
+	$grid[ $args[ 0 ] ][ $args[ 1 ] ] = $args[ 2 ] ;
+
+	_configBaseSet( "grid" , $grid ) ;
+
+}
+
+
 
 
 function _gridBaseSetChar( $inch ) {
@@ -106,22 +131,31 @@ function _gridBaseSet( $vx , $vy , $v ) {
 
 function _gridBaseLoad( $fn ) {
 
+	if( !_configBaseQuery( "loaded" ) ) {
+		_gridBaseInit( ) ;
+		_logBaseWrite("_gridBaseLoad NOT LOADED");
+		return ;
+	}
+
 	$afp = _configBaseGet( "targetdir" )."/".$fn ;
 
 	if( file_exists( $afp ) ) {
 
-		system("cp $afp $afp.".time());
+		system( "cp $afp $afp.".time( ) ) ;
 
-		$data = json_decode( gzdecode( base64_decode( file_get_contents( _configBaseGet( "targetdir" )."/".$fn ) ) ) , true ) ;
+		$t1 = file_get_contents( _configBaseGet( "targetdir" )."/".$fn ) ;
+		$t1 = _appBaseDecrypt( $t1 ) ;
+		$t2 = base64_decode( $t1 ) ;
+		$t3 = gzdecode( $t2 ) ;
+		$t4 = json_decode( $t3 , true ) ;
 
-		$data=_appBaseDecrypt($data);
+		$data = $t4 ;
 
-		_configBaseSet( "grid" , $data['grid'] );
-		$config = $data['config'] ;
-		_configBaseQuery("config",$config);
+		_configBaseSet( "grid" , $data[ 'grid' ] ) ;
+		$config = $data[ 'config' ] ;
+		_configBaseQuery( "config" , $config ) ;
 		
-
-	}else{
+	} else {
 
 		_gridBaseInit( ) ;
 
@@ -174,6 +208,8 @@ function _gridBaseSample( ) {
 
 
 }
+
+
 
 
 

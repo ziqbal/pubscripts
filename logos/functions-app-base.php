@@ -96,34 +96,79 @@ function _appBaseForceSave( ) {
 
 }
 
+function _appBaseLoadSession( ) {
+
+
+	_gridBaseLoad( "out.logos" ) ;
+
+
+}
+
 function _appBaseSaveSession( ) {
+
+	if( ! _configBaseQuery( "loaded" ) ) {
+
+		_logBaseWrite( "_appBaseSaveSession NOT LOADED" ) ;
+		return ;
+
+	}
 
 	$data = array( ) ;
 	$data[ 'grid' ] = _configBaseGet( "grid" ) ;
 
 	$config = array( ) ;
-	$config['cursor']['x']=_cursorBaseGetX();
-	$config['cursor']['y']=_cursorBaseGetY();
+	$config[ 'cursor' ][ 'x' ] = _cursorBaseGetX( ) ;
+	$config[ 'cursor' ][ 'y' ] = _cursorBaseGetY( ) ;
 
-	$data['config']=$config;
+	$data[ 'config' ] = $config ;
 
 	//_logBaseWrite($config);
 
-	$encoded = _appBaseEncrypt( base64_encode( gzencode( json_encode( $data ) , 9 ) ) ) ;
+	$t1 = json_encode( $data ) ;
+	$t2 = gzencode( $t1 , 9 ) ;
+	$t3 = base64_encode( $t2 ) ;
 
-	file_put_contents( _configBaseGet( "targetdir")."/out.logos" , $encoded ) ;	
+	$encoded = _appBaseEncrypt( $t3 ) ;
+
+	file_put_contents( _configBaseGet( "targetdir" )."/out.logos" , $encoded ) ;	
 
 }
 
 function _appBaseEncrypt( $data ) {
 
-	return($data);
+	//return($data);
+
+	$key = substr( _configBaseQuery( "loadedHash" ) , 0 , \Sodium\CRYPTO_SECRETBOX_KEYBYTES ) ; 
+
+	$nonce = \Sodium\randombytes_buf( \Sodium\CRYPTO_SECRETBOX_NONCEBYTES ) ;
+
+	$res = $nonce.\Sodium\crypto_secretbox( $data , $nonce, $key ) ;
+
+	return( $res );
 
 }
 
 function _appBaseDecrypt( $data ) {
 
-	return($data);
+	$key = substr( _configBaseQuery( "loadedHash" ) , 0 , \Sodium\CRYPTO_SECRETBOX_KEYBYTES ) ; 
+
+	$decoded = $data ;
+	
+    $nonce = mb_substr( $decoded , 0 , \Sodium\CRYPTO_SECRETBOX_NONCEBYTES , '8bit' ) ;
+    $ciphertext = mb_substr( $decoded , \Sodium\CRYPTO_SECRETBOX_NONCEBYTES , null , '8bit' ) ;
+    
+    $decrypted = \Sodium\crypto_secretbox_open( $ciphertext, $nonce, $key ) ;
+
+	if ( $decrypted === false ) {
+
+		_logBaseWrite( "_appBaseDecryptERR!" ) ;
+		_screenBaseCleanUp( ) ;
+
+		exit ;
+
+	}    
+
+	return( $decrypted ) ;
 
 }
 

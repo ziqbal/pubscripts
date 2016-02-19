@@ -221,6 +221,35 @@ function _cursorBaseDown( ) {
 
 }
 
+function _cursorBaseGridLine( ) {
+
+	$cy = _configBaseQuery( "cursory" ) ;
+	$gy = _configBaseQuery( "gridy" ) ;
+	$y = $gy + $cy - 1 ;
+
+	$cx = _configBaseQuery( "cursorx" ) ;
+	$gx = _configBaseQuery( "gridx" ) ;
+	$x = $gx + $cx - 1 ;	
+
+	$res = array( "x" => $x , "y" => $y ) ;
+
+	$line = "";
+
+	for( $i = 0 ; $i < $x ; $i++ ) {
+
+		$z = _gridBaseQuery( $i , $y ) ;
+		if($z==-1) break;
+
+		$line.=chr(($z&255));
+
+	}
+
+	//_logBaseWrite($line);
+
+	return( $line) ;
+
+}
+
 function _cursorBaseDebug( ) {
 
 	print( _cursorBaseGetX( ).","._cursorBaseGetY( ) ) ;

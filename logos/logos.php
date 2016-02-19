@@ -16,11 +16,7 @@ while( true ) {
 
     _keyboardBasePushInput( ord( stream_get_contents( STDIN , 1 ) ) ) ;
 
-    //if( _configBaseGet( "commandquit" ) ) break ;
-
   } else {
-
-	//_appHandleInput( stream_get_contents( STDIN , 1 ) ) ;
 
 	  if( !_appBaseLoop( ) ) break ;
 

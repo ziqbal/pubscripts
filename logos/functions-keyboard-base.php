@@ -114,6 +114,12 @@ function _keyboardBaseHandleQuit( ) {
 
 }
 
+function _keyboardBaseHandleFlush( ) {
+
+	_configBaseQuery( "keyboardbuffer" , array( ) ) ;
+
+}
+
 function _keyboardBaseHandleModeToggle( ) {
 
 
@@ -121,6 +127,8 @@ function _keyboardBaseHandleModeToggle( ) {
 
 
 	if( $byte == 27 ) {
+
+		_keyboardBaseHandleFlush( ) ;
 
 		if( _appBaseGetMode( ) == "command" ) {
 
@@ -210,3 +218,74 @@ function _keyboardBaseInputIsPrintable( ) {
 	return( false ) ;
 
 }
+
+
+function _keyboardBaseHandleLoad( ) {
+
+//	if( _appBaseGetMode( ) == "edit" ) return( false ) ;
+
+	$byte = _keyboardBasePullInput( ) ;
+
+	if( chr( $byte ) == 'p' ) {
+
+
+		if( !_configBaseQuery( "loaded" ) ) {
+			$t = _cursorBaseGridLine( ) ;
+
+			if( $t != "" ) {
+
+				$ph = hash( 'sha256' , $t ) ; 
+
+				/*
+				$ph = \Sodium\crypto_pwhash_scryptsalsa208sha256_str(
+				    $t,
+				    \Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_OPSLIMIT_INTERACTIVE,
+				    \Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_MEMLIMIT_INTERACTIVE
+				);
+				*/
+
+				//$ph = password_hash($t, PASSWORD_DEFAULT);
+
+				//$nonce = \Sodium\randombytes_buf(\Sodium\CRYPTO_SECRETBOX_NONCEBYTES);
+				//_logBaseWrite($nonce);
+	   /* 
+	    return setcookie(
+	        $name,
+	        base64_encode(
+	            $nonce.
+	            \Sodium\crypto_secretbox(
+	                json_encode($cookieData),
+	                $nonce,
+	                $key
+	            )
+	        )
+	    );
+	    */
+				_configBaseQuery( "loadedHash" , $ph ) ;
+				_configBaseQuery( "loaded" , true ) ;
+
+				_appBaseLoadSession( ) ;
+
+				_logBaseWrite( "LOADED!!" ) ;
+
+
+			}
+		}
+
+		return( true ) ;
+
+
+
+	}
+
+
+	_keyboardBasePushInput( $byte ) ;
+
+	return( false ) ;	
+
+
+
+}
+
+
+

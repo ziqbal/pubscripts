@@ -1,5 +1,11 @@
 <?php
 
+// FIXME TODO
+// Add params for url directory paths
+// Add params for DB details
+
+
+$HOME = getenv( "HOME" ) ;
 
 if( count( $argv ) < 2 ) { print( "More args!" ) ; exit ; }
 
@@ -7,39 +13,49 @@ $_CONFIG = array( ) ;
 $_CONFIG[ "originalargs" ] = $argv ;
 
 
-if(!isset($_CONFIG["originalargs"][2])){
-	print("project name required!");
-	exit;
+if( !isset( $_CONFIG[ "originalargs" ][ 2 ] ) ) {
+
+	print( "project name required!" ) ;
+	exit ;
+
 }
 
-$_CONFIG[ "targetdir" ] = $argv[1] ;
+$_CONFIG[ "targetdir" ] = $argv[ 1 ] ;
 //print_r($_CONFIG);
 
 /////////
 
-$APPARCHIVE = "/Users/zaf/Downloads/wordpress.zip" ;
+$APPARCHIVE = "$HOME/Downloads/wordpress.zip" ;
 
-if(!file_exists($APPARCHIVE)){
-	print("$APPARCHIVE does not exist!");
-	exit;
+if( !file_exists( $APPARCHIVE ) ) {
+
+	print( "$APPARCHIVE does not exist!" ) ;
+
+	exit ;
+
 }
 
-$projectname = strtolower($_CONFIG[ "originalargs" ][ 2 ] );
+$projectname = strtolower( $_CONFIG[ "originalargs" ][ 2 ] ) ;
 
 //print($_CONFIG["targetdir"]."/wordpress".$projectname);exit;
-if(is_dir($_CONFIG["targetdir"]."/wordpress".$projectname)){
-	print($_CONFIG["targetdir"]."/wordpress".$projectname." already exists!");
-	exit;
+if( is_dir( $_CONFIG[ "targetdir" ]."/wordpress".$projectname ) ) {
+
+	print( $_CONFIG[ "targetdir" ]."/wordpress".$projectname." already exists!" ) ;
+
+	exit ;
 
 }
 
-$shortprojectname=$projectname;
-if(strlen($projectname)>10){
-	$shortprojectname=substr($projectname,0,5).substr($projectname,-5);
+$shortprojectname = $projectname ;
+
+if( strlen( $projectname ) > 10 ) {
+
+	$shortprojectname = substr( $projectname , 0 , 5 ).substr( $projectname , -5 ) ;
+
 }
 
-print("Using database [$projectname] user [$shortprojectname] password [$shortprojectname] ...\n");
-print($_CONFIG[ "targetdir" ] );
+print( "Using database [$projectname] user [$shortprojectname] password [$shortprojectname] ...\n" ) ;
+print( $_CONFIG[ "targetdir" ] ) ;
 //print( $projectname ) ;
 
 
@@ -51,29 +67,45 @@ $dbcmds[ ] = "FLUSH PRIVILEGES;" ;
 
 //print_r($dbcmds);
 
-$DB_host = "localhost";
-$DB_user = "root";
-$DB_pass = "";
+$DB_host = "localhost" ;
+$DB_user = "root" ;
+$DB_pass = "dullpoke3" ;
 
- try {
-     $DBcon = new PDO("mysql:host={$DB_host};",$DB_user,$DB_pass); 
-     $DBcon->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
- } catch(PDOException $e) {
-     echo "ERROR : ".$e->getMessage();
- }
+try {
 
-foreach($dbcmds as $dbcmd ){
-	try{
-	$DBcon->exec($dbcmd);
-	}catch(PDOException $e){
-		if(!substr($dbcmd,0,strlen("DROP USER"))=="DROP USER"){
-			print($e->getMessage());
-			exit;
-		}else{
-			print($e->getMessage());
-			print("CONTINUE");
+ $DBcon = new PDO("mysql:host={$DB_host};" , $DB_user , $DB_pass ) ; 
+ $DBcon->setAttribute( PDO::ATTR_ERRMODE , PDO::ERRMODE_EXCEPTION ) ;
+
+} catch( PDOException $e ) {
+
+ echo "ERROR : ".$e->getMessage( ) ;
+
+}
+
+foreach( $dbcmds as $dbcmd ) {
+
+	try {
+
+		$DBcon->exec($dbcmd);
+
+	} catch( PDOException $e ) {
+
+		if( !substr( $dbcmd , 0 , strlen( "DROP USER" ) ) == "DROP USER" ) {
+
+			print( $e->getMessage( ) ) ;
+
+			exit ;
+
+		} else {
+
+			print( $e->getMessage( ) ) ;
+
+			print( "CONTINUE" ) ;
+
 		}
+
 	}
+
 }
 
 
@@ -88,8 +120,8 @@ define( 'WP_ALLOW_MULTISITE', true );
 /*
 define('MULTISITE', true);
 define('SUBDOMAIN_INSTALL', false);
-define('DOMAIN_CURRENT_SITE', '192.168.1.100');
-define('PATH_CURRENT_SITE', '/_craft_/wordpress{$projectname}/');
+define('DOMAIN_CURRENT_SITE', '192.168.1.112');
+define('PATH_CURRENT_SITE', '/projects/wordpress{$projectname}/');
 define('SITE_ID_CURRENT_SITE', 1);
 define('BLOG_ID_CURRENT_SITE', 1);
 */
@@ -119,8 +151,8 @@ define('AUTOSAVE_INTERVAL',600);
 @ini_set( 'error_log','/tmp/php_error.log' );
 define('WP_DEBUG_LOG', true);
 
-define( 'WP_SITEURL' , 'http://192.168.1.100/_craft_/wordpress{$projectname}' ) ;
-define( 'WP_HOME' , 'http://192.168.1.100/_craft_/wordpress{$projectname}' ) ;
+define( 'WP_SITEURL' , 'http://192.168.1.112/projects/wordpress{$projectname}' ) ;
+define( 'WP_HOME' , 'http://192.168.1.112/projects/wordpress{$projectname}' ) ;
 
 if ( !defined('ABSPATH') )
 	define('ABSPATH', dirname(__FILE__) . '/');
@@ -129,7 +161,7 @@ require_once(ABSPATH . 'wp-settings.php');
 
 END;
 
-file_put_contents("/tmp/wp-config.php","$WPCONFIG");
+file_put_contents( "/tmp/wp-config.php" , "$WPCONFIG" ) ;
 
 
 $htaccess = <<<END
@@ -138,7 +170,7 @@ $htaccess = <<<END
 <IfModule mod_rewrite.c>
 
 RewriteEngine On
-RewriteBase /_craft_/wordpress{$projectname}/
+RewriteBase /projects/wordpress{$projectname}/
 RewriteRule ^index\.php$ - [L]
 
 # add a trailing slash to /wp-admin
@@ -155,26 +187,30 @@ RewriteRule . index.php [L]
 
 END;
 
-file_put_contents("/tmp/htaccess.txt","$htaccess");
+file_put_contents( "/tmp/htaccess.txt" , "$htaccess" ) ;
 
-$syscmds = array();
-$syscmds[]="cd /tmp/;rm -rf wordpress;unzip -q $APPARCHIVE;";
-$syscmds[]="mv /tmp/wordpress ./wordpress{$projectname}";
-$syscmds[]="mkdir wordpress{$projectname}/wp-content/uploads/";
-$syscmds[]="chmod ugo+rwx wordpress{$projectname}/wp-content/uploads/";
-$syscmds[]="cp /tmp/wp-config.php wordpress{$projectname}/";
-$syscmds[]="cp /tmp/htaccess.txt wordpress{$projectname}/.htaccess";
+$syscmds = array( ) ;
+
+$syscmds[] = "cd /tmp/;rm -rf wordpress;unzip -q $APPARCHIVE;" ;
+$syscmds[] = "mv /tmp/wordpress ./wordpress{$projectname}" ;
+$syscmds[] = "mkdir wordpress{$projectname}/wp-content/uploads/" ;
+$syscmds[] = "chmod ugo+rwx wordpress{$projectname}/wp-content/uploads/" ;
+$syscmds[] = "cp /tmp/wp-config.php wordpress{$projectname}/" ;
+$syscmds[] = "cp /tmp/htaccess.txt wordpress{$projectname}/.htaccess" ;
 
 
-chdir($_CONFIG[ "targetdir" ]);
-foreach($syscmds as $syscmd){
-	system($syscmd);
+chdir( $_CONFIG[ "targetdir" ] ) ;
+
+foreach( $syscmds as $syscmd ) {
+
+	system( $syscmd ) ;
+
 }
 
 
-print("\n=============================================\n");
-print($_CONFIG["targetdir"]."/wordpress".$projectname);
-print("\n=============================================\n");
+print( "\n=============================================\n" ) ;
+print( $_CONFIG[ "targetdir" ]."/wordpress".$projectname ) ;
+print( "\n=============================================\n" ) ;
 
 
 

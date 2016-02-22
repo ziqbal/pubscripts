@@ -102,6 +102,11 @@ function _appBaseLoadSession( ) {
 	_gridBaseLoad( "out.logos" ) ;
 
 
+	_cursorBaseLoadFromConfig( ) ;
+
+
+
+
 }
 
 function _appBaseSaveSession( ) {

@@ -22,6 +22,9 @@ function _gridBase( ) {
 	_configBaseSet( "gridwidth" , 708 ) ;
 	_configBaseSet( "gridheight" , 168 ) ;
 
+	//_configBaseSet( "gridwidth" , 10 ) ;
+	//_configBaseSet( "gridheight" , 5 ) ;
+
 	_configBaseSet( "gridx" , 0 ) ;
 	_configBaseSet( "gridy" , 0 ) ;
 
@@ -32,7 +35,7 @@ function _gridBase( ) {
 
 	//_gridBaseSample( ) ;
 
-	_configBaseSet( "gridmodifytime" , _configBaseGet("apptime")) ;
+	_configBaseSet( "gridmodifytime" , _configBaseGet( "apptime" ) ) ;
 	//_logBaseWrite(_configBaseGet("grid"));exit;
 
 }
@@ -87,11 +90,20 @@ function _gridBaseSetChar( $inch ) {
 
 function _gridBaseGet( $i , $j ) {
 
-	$grid = _configBaseGet("grid");
+	$grid = _configBaseGet( "grid" ) ;
 
-	$gx = _configBaseGet( "gridx" ) ;
-	$gy = _configBaseGet( "gridy" ) ;
-	return($grid[$i+$gx][$j+$gy]);
+	$gx = _configBaseGet( "gridx" ) + $i ;
+	$gy = _configBaseGet( "gridy" ) + $j ;
+
+	if( ( $gx >= _configBaseQuery( "gridwidth" ) ) || ( $gy >= _configBaseQuery( "gridheight" ) ) ) {
+
+		_logBaseWrite("$gx $gy");
+		return(-1);
+
+	}
+
+
+	return( $grid[ $gx ][ $gy ] ) ;
 
 
 }
@@ -100,10 +112,17 @@ function _gridBaseGetChar( $i , $j ) {
 
 	$grid = _configBaseGet("grid");
 
-	$gx = _configBaseGet( "gridx" ) ;
-	$gy = _configBaseGet( "gridy" ) ;
+	$gx = _configBaseGet( "gridx" ) + $i ;
+	$gy = _configBaseGet( "gridy" ) + $j ;
 
-	$v=$grid[$i+$gx][$j+$gy];
+	if( ( $gx >= _configBaseQuery( "gridwidth" ) ) || ( $gy >= _configBaseQuery( "gridheight" ) ) ) {
+
+		_logBaseWrite( "$gx $gy" ) ;
+		return( NULL ) ;
+
+	}
+
+	$v=$grid[$gx][$gy];
 
 	if($v==-1) return(" ") ;
 
@@ -133,7 +152,7 @@ function _gridBaseLoad( $fn ) {
 
 	if( !_configBaseQuery( "loaded" ) ) {
 		_gridBaseInit( ) ;
-		_logBaseWrite("_gridBaseLoad NOT LOADED");
+		_logBaseWrite( "_gridBaseLoad NOT LOADED" ) ;
 		return ;
 	}
 

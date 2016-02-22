@@ -250,6 +250,19 @@ function _cursorBaseGridLine( ) {
 
 }
 
+function _cursorBaseLoadFromConfig( ) {
+
+	$config = _configBaseGet( "config" ) ;
+	//_logBaseWrite($config);
+	if( isset( $config[ 'cursor' ] ) ) {
+		
+		_configBaseSet( "cursorx" , $config[ 'cursor' ][ 'x' ] ) ;
+		_configBaseSet( "cursory" , $config[ 'cursor' ][ 'y' ] ) ;
+
+	}	
+
+}
+
 function _cursorBaseDebug( ) {
 
 	print( _cursorBaseGetX( ).","._cursorBaseGetY( ) ) ;

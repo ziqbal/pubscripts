@@ -163,7 +163,7 @@ function _keyboardBaseHandleMovement( ) {
 
 	if( chr($byte) == 'j' ) {
 
-		if(_configBaseGet("cursorx")>1) _cursorBaseLeft( ) ;
+		if( _configBaseGet( "cursorx" ) > 1 ) _cursorBaseLeft( ) ;
 		return( true ) ;
 
 	}
@@ -230,37 +230,13 @@ function _keyboardBaseHandleLoad( ) {
 
 
 		if( !_configBaseQuery( "loaded" ) ) {
+			
 			$t = _cursorBaseGridLine( ) ;
 
 			if( $t != "" ) {
 
 				$ph = hash( 'sha256' , $t ) ; 
 
-				/*
-				$ph = \Sodium\crypto_pwhash_scryptsalsa208sha256_str(
-				    $t,
-				    \Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_OPSLIMIT_INTERACTIVE,
-				    \Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_MEMLIMIT_INTERACTIVE
-				);
-				*/
-
-				//$ph = password_hash($t, PASSWORD_DEFAULT);
-
-				//$nonce = \Sodium\randombytes_buf(\Sodium\CRYPTO_SECRETBOX_NONCEBYTES);
-				//_logBaseWrite($nonce);
-	   /* 
-	    return setcookie(
-	        $name,
-	        base64_encode(
-	            $nonce.
-	            \Sodium\crypto_secretbox(
-	                json_encode($cookieData),
-	                $nonce,
-	                $key
-	            )
-	        )
-	    );
-	    */
 				_configBaseQuery( "loadedHash" , $ph ) ;
 				_configBaseQuery( "loaded" , true ) ;
 

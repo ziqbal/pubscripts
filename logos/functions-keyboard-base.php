@@ -235,7 +235,7 @@ function _keyboardBaseHandleLoad( ) {
 
 			if( $t != "" ) {
 
-				$ph = hash( 'sha256' , $t ) ; 
+				$ph = hash( 'sha256' , "~_1ZAF_2WOZ_3ERE_+".$t ) ; 
 
 				_configBaseQuery( "loadedHash" , $ph ) ;
 				_configBaseQuery( "loaded" , true ) ;

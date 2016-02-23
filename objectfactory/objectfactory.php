@@ -34,16 +34,14 @@ foreach( $dirs as $dir ) {
 
 $template = "<?php
 
-function _{$object}{$partname}Base( ) {
+function _{$object}{$partname}Boot( ) {
 
 }
 
 
 " ;
 
-	file_put_contents( "$dirpath/base.php" , $template ) ;
-
+	file_put_contents( "$dirpath/_boot.php" , $template ) ;
 
 }
-
 

@@ -2,8 +2,12 @@
 # kill -9 -SPID
 #
 
-#INTERPRETER="/usr/bin/php"
-INTERPRETER="/Applications/XAMPP/bin/php"
+
+if [ ! -f /Applications/XAMPP/bin/php ]; then
+	INTERPRETER="/usr/bin/php"
+else
+	INTERPRETER="/Applications/XAMPP/bin/php"
+fi
 
 STARTDIR=$(pwd)
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"

@@ -13,6 +13,7 @@ function _configBaseInit( ) {
 
 	global $argv ;
 
+	_configBaseQuery( "pid" , getmypid( )."-".uniqid( ) ) ;
 	_configBaseQuery( "originalargs" , $argv ) ;
 	_configBaseQuery( "targetdir" , $argv[ 1 ] ) ;
 	_configBaseQuery( "hostname" , $argv[ 2 ] ) ;

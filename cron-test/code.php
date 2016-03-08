@@ -1,5 +1,7 @@
 <?php
 
+
+
 include( "functions-boot-base.php" ) ;
 
 _configBaseDebug( ) ;
@@ -16,7 +18,7 @@ _logBaseWrite($a);
 
 for($i=0;$i<65;$i++){
 
-	sleep( 1 ) ;
+	sleep( 3 ) ;
 
 	_logBaseWrite( "TICKTOCK $i" ) ;
 

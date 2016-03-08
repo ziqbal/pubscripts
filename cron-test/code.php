@@ -20,6 +20,4 @@ for($i=0;$i<65;$i++){
 
 	_logBaseWrite( "TICKTOCK $i" ) ;
 
-
-
 }

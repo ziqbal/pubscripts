@@ -2,7 +2,6 @@
 # kill -9 -SPID
 #
 
-
 if [ ! -f /Applications/XAMPP/bin/php ]; then
 	INTERPRETER="/usr/bin/php"
 else

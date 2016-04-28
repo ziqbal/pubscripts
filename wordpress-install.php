@@ -126,6 +126,9 @@ define('SITE_ID_CURRENT_SITE', 1);
 define('BLOG_ID_CURRENT_SITE', 1);
 */
 
+
+define('DISALLOW_FILE_EDIT', true);
+
 define('DB_NAME', 'wp{$projectname}');
 define('DB_USER', '$shortprojectname');
 define('DB_PASSWORD', '$shortprojectname');

@@ -1,0 +1,399 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"sel",
+				"selectedText"
+			],
+			[
+				"mo",
+				"_modeTrackPos"
+			],
+			[
+				"pos",
+				"posLast"
+			],
+			[
+				"speed",
+				"speedTrack"
+			],
+			[
+				"_mo",
+				"_modeTrackPos"
+			],
+			[
+				"_mod",
+				"_modeTrackTime"
+			],
+			[
+				"time",
+				"timedelta"
+			],
+			[
+				"inc",
+				"incomingByte"
+			],
+			[
+				"__canvas",
+				"__canvasData"
+			],
+			[
+				"lo",
+				"logFile"
+			],
+			[
+				"file",
+				"file_exists"
+			],
+			[
+				"ip",
+				"ipFile"
+			],
+			[
+				"sp",
+				"spriteZoom"
+			],
+			[
+				"spr",
+				"spriteW"
+			],
+			[
+				"dro",
+				"dropy"
+			],
+			[
+				"__a",
+				"__activey"
+			],
+			[
+				"el",
+				"eloffset"
+			],
+			[
+				"__mo",
+				"__mousey"
+			],
+			[
+				"__m",
+				"__mousex"
+			],
+			[
+				"__in",
+				"__inwidth"
+			],
+			[
+				"__h",
+				"__inheight"
+			],
+			[
+				"img",
+				"imginfo"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 207.0,
+		"last_filter": ":w",
+		"selected_items":
+		[
+			[
+				":w",
+				":w - Save"
+			],
+			[
+				":",
+				":w - Save"
+			],
+			[
+				":q",
+				"Set Syntax: SQL"
+			],
+			[
+				":W",
+				":w - Save"
+			]
+		],
+		"width": 392.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/www/_craft_/pubscripts"
+	],
+	"file_history":
+	[
+		"/www/index.php",
+		"/Users/Shared/htdocs/_craft_/testing/phpinfo.php",
+		"/Users/Shared/htdocs/_craft_/bookmarklets/debug/bootBase.js",
+		"/Users/Shared/htdocs/_craft_/bookmarklets/debug/index.php",
+		"/Users/Shared/htdocs/_craft_/bookmarklets/debug/coreBase.js",
+		"/Users/Shared/htdocs/_craft_/bookmarklets/debug/notes.txt",
+		"/Users/Shared/htdocs/_craft_/bookmarklets/client.js",
+		"/Users/Shared/htdocs/_craft_/bookmarklets/debug.php",
+		"/Users/Shared/htdocs/_craft_/bookmarklets/test.php",
+		"/Users/Shared/htdocs/_craft_/wtf/invoices.csv",
+		"/Users/Shared/htdocs/_craft_/arduino/fireflyenterprise/mode-noon.ino",
+		"/Users/Shared/htdocs/_craft_/arduino/fireflyenterprise/mode-spiral.ino",
+		"/Users/Shared/htdocs/_craft_/arduino/xbeec/xbeec.ino",
+		"/Users/Shared/htdocs/_craft_/arduino/fireflyenterprise/fireflyenterprise.ino",
+		"/Users/Shared/htdocs/_craft_/arduino/fireflyenterprise/mode-sine.ino",
+		"/Users/Shared/htdocs/_craft_/arduino/fireflyenterprise/mode-boundary.ino",
+		"/Users/Shared/htdocs/_craft_/arduino/fireflyenterprise/mode-supernova.ino",
+		"/Users/Shared/htdocs/_craft_/arduino/fireflyenterprise/mode-default.ino",
+		"/Users/Shared/htdocs/_craft_/arduino/fireflyenterprise/mode-random.ino",
+		"/Users/Shared/htdocs/_craft_/wtf/jetbrains.php",
+		"/Users/Shared/htdocs/_craft_/arduino/fireflyenterprise/mode-track.ino",
+		"/Users/Shared/htdocs/_craft_/uicron/cron/task-getpagevars.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001700-screenblank.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001400-screensplash.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/002200-screenrotate.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/000600-sensors.php",
+		"/Users/Shared/htdocs/_craft_/maker/www/template-index.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001000-gamemaster.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/000450-sensors.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/002300-inputpin.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/000650-audio.php",
+		"/Users/Shared/htdocs/_craft_/maker/www/docs/test.txt",
+		"/Users/Shared/htdocs/_craft_/maker/src/001200-main.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/005000-playcanvas.php",
+		"/Users/Shared/htdocs/_craft_/maker/projectVTM/www/docs/screenshot.sh",
+		"/Users/Shared/htdocs/_craft_/maker/src/000300-log.php",
+		"/Users/Shared/htdocs/_craft_/maker/www/logajax.php",
+		"/Users/Shared/htdocs/_craft_/maker/www/logprocess.php",
+		"/Users/Shared/htdocs/_craft_/maker/.gitignore",
+		"/Users/Shared/htdocs/_craft_/maker/src/002010-textscore.php",
+		"/Users/Shared/htdocs/_craft_/maker/www/css/boot.css",
+		"/Users/Shared/htdocs/_craft_/maker/src/000000-notes.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001400-screen3.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/002300-inputbuttonsubmit.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/002350-facebook.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001500-screen4.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/002000-timer.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/000400-log.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001100-gamemaster.php",
+		"/Users/Shared/htdocs/_craft_/maker/build.sh",
+		"/Users/Shared/htdocs/_craft_/maker/entitymaps",
+		"/Users/Shared/htdocs/_craft_/maker/src/001300-screen2.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001110-textscore.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001700-sprite2.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001600-sprite1.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/000500-util.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001900-sprite4.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001800-sprite3.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/002100-inputfirstname.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/002101-inputlastname.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/002102-inputemail.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/000300-macros.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/002360-hotspotplayagin.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/002370-hotspotshare.php",
+		"/Users/Shared/htdocs/_craft_/maker/maker.js",
+		"/Users/Shared/htdocs/_craft_/maker/www/maker.js",
+		"/Users/Shared/htdocs/_craft_/maker/src/002200-inputcheckboxtac.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/002101-inputlasttname.php",
+		"/Users/Shared/htdocs/_craft_/maker/001150-facebook.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001150-facebook.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001210-screen0.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001200-screen1.php",
+		"/Users/Shared/htdocs/_craft_/maker/upload.sh",
+		"/Users/Shared/htdocs/_craft_/maker/src/001590-gamemaster.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001400-sprite2.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001300-sprite1.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001410-sprite3.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001420-sprite4.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001500-timer.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001200-screen2.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001210-screen3.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001530-inputbuttonsubmit.php",
+		"/Users/Shared/htdocs/_craft_/maker/www/gfx/spritesstart.txt",
+		"/Users/Shared/htdocs/_craft_/maker/src/001100-screen1.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001220-screen4.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001510-inputfirstname.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001520-inputcheckboxtac.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001000-pointer.php",
+		"/Users/Shared/htdocs/_craft_/maker/gen-graph-p1.php",
+		"/Users/Shared/htdocs/_craft_/maker/functions.php",
+		"/Users/Shared/htdocs/_craft_/maker/gen-graph-p2.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001510-inputlastname.php",
+		"/Users/Shared/htdocs/_craft_/maker/www/js/boot.js",
+		"/Users/Shared/htdocs/_craft_/maker/src/001510-form.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001120-sprite2.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001130-timer.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001110-sprite1.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001100-screen2.php",
+		"/Users/Shared/htdocs/_craft_/maker/www/gfx/timdim.php",
+		"/Users/Shared/htdocs/_craft_/maker/maker.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001110-testsprite.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001100-testscreen.ph",
+		"/Users/Shared/htdocs/_craft_/maker/src/001110-testsprite.ph",
+		"/Users/Shared/htdocs/_craft_/maker/www/frame.html",
+		"/Users/Shared/htdocs/_craft_/maker/src/000200-header.php",
+		"/Users/Shared/htdocs/_craft_/maker/projectVTM/src/000200-header.php",
+		"/Users/Shared/htdocs/_craft_/maker/projectVTM/src/000400-log.php",
+		"/Users/Shared/htdocs/_craft_/maker/projectVTM/src/001000-pointer.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001500-blank.php",
+		"/Users/Shared/htdocs/_craft_/maker/www/inc-head.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/001600-main.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/000900-broadcast.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/000800-watchdog.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/000100-config.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/000600-window.php",
+		"/Users/Shared/htdocs/_craft_/maker/src/000700-clock.php",
+		"/Users/Shared/htdocs/_craft_/maker/config-javascript.php",
+		"/Users/Shared/htdocs/projects/maker/src/000500-util.php",
+		"/Users/zafar/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/zafar/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings"
+	],
+	"find":
+	{
+		"height": 25.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"GET",
+			"medi",
+			"z",
+			"screen3done",
+			"moduleParent",
+			"_grandmaster_hithotspotrect",
+			"gerFun"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "untitled.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 229.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
